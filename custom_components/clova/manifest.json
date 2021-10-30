@@ -1,0 +1,9 @@
+{
+  "domain": "clova",
+  "name": "CLOVA",
+  "version": "1.0.0",
+  "documentation": "https://github.com/huimang2/CLOVA",
+  "requirements": [],
+  "dependencies": ["http"],
+  "codeowners": ["huimang2"]
+}
