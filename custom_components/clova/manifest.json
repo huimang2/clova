@@ -1,7 +1,11 @@
 {
   "domain": "clova",
   "name": "CLOVA",
+<<<<<<< HEAD
   "version": "1.0.2",
+=======
+  "version": "1.0.1",
+>>>>>>> e9d28d089706342a665a705abd06baf4cce52494
   "documentation": "https://github.com/huimang2/CLOVA",
   "requirements": [],
   "dependencies": ["http"],

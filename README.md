@@ -13,6 +13,7 @@ CEK를 통해 CLOVA와 홈어시스턴트 사이의 커뮤니케이션을 지원
 | Version | Date        | 내용              |
 | :-----: | :---------: | ----------------------- |
 | v1.0.0  | 2021.10.31  | First version  |
+| v1.0.1  | 2021.10.31  | String.json 파일과 translations 폴더 삭제  |
 
 <br>
 
@@ -45,6 +46,6 @@ https://developers.naver.com/console/clova/home_ext/DevConsole/Guides/Register_C
   - **클라이언트 secret**: `아무 글자나 입력`
 * 심사신청은 하지마세요!
  
-[version-shield]: https://img.shields.io/badge/version-v1.0.0-orange.svg
+[version-shield]: https://img.shields.io/badge/version-v1.0.1-orange.svg
 [hakc-shield]: https://img.shields.io/badge/HAKC-Enjoy-blue.svg
 [hacs-shield]: https://img.shields.io/badge/HACS-Custom-red.svg
