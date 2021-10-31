@@ -13,7 +13,7 @@ CEK를 통해 CLOVA와 홈어시스턴트 사이의 커뮤니케이션을 지원
 | Version | Date        | 내용              |
 | :-----: | :---------: | ----------------------- |
 | v1.0.0  | 2021.10.31  | First version  |
-| v1.0.0  | 2021.10.31  | String.json 파일과 translations 폴더 삭제  |
+| v1.0.1  | 2021.10.31  | String.json 파일과 translations 폴더 삭제  |
 
 <br>
 
