@@ -44,7 +44,7 @@ https://developers.naver.com/console/clova/home_ext/DevConsole/Guides/Register_C
   - **Access token 재발급 URI (선택)**: `https://HA주소/auth/token?grant_type=refresh_token`
   - **클라이언트 secret**: `아무 글자나 입력`
 * 심사신청은 하지마세요!
-  
+ 
 [version-shield]: https://img.shields.io/badge/version-v1.0.0-orange.svg
 [hakc-shield]: https://img.shields.io/badge/HAKC-Enjoy-blue.svg
 [hacs-shield]: https://img.shields.io/badge/HACS-Custom-red.svg
