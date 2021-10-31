@@ -1,5 +1,6 @@
 {
   "name": "[KR] 클로바홈 EX",
   "country": "KR",
+  "domains": ["sensor"],
   "render_readme": true
 }
