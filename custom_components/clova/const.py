@@ -59,7 +59,6 @@ ATTR_CURRENT_TEMPERATUE = "currentTemperature"
 ATTR_CUSTOM_COMMANDS = "customCommands"
 ATTR_DIRECTION = "direction"
 ATTR_DISCOVERED_APPLIANCES = "discoveredAppliances"
-ATTR_DELTA_FAN_SPEED = "deltaFanSpeed"
 ATTR_DELTA_TEMPERATURE = "deltaTemperature"
 ATTR_FAN_SPEED = "fanSpeed"
 ATTR_FRIENDLY_NAME = "friendlyName"
@@ -105,6 +104,9 @@ CONF_ENTITY_CONFIG = "entity_config"
 CONF_EXPOSE_BY_DEFAULT = "expose_by_default"
 CONF_EXPOSED_DOMAINS = "exposed_domains"
 CONF_LOCATION = "location"
+
+TRANSLATION_ONDO = "온도"
+TRANSLATION_SOGDO = "속도"
 
 DEFAULT_EXPOSE_BY_DEFAULT = True
 DEFAULT_EXPOSED_DOMAINS = [
@@ -278,7 +280,7 @@ _ACTIONS = [
     _ACTION("CurrentTemperature", [PREFIX_GET], [], ["climate"]),
     _ACTION("DetectionCount", [PREFIX_GET], [], []),
     _ACTION("DetectedTime", [PREFIX_GET], [], []),
-    _ACTION("DeviceState", [PREFIX_GET], [], ["climate"]),
+    _ACTION("DeviceState", [PREFIX_GET], [], ["climate", "fan"]),
     _ACTION("Elevator", [PREFIX_CALL], [], []),
     _ACTION("EstimateBill", [PREFIX_GET], [], []),
     _ACTION("EstimateConsumption", [PREFIX_GET], [], []),
@@ -293,14 +295,14 @@ _ACTIONS = [
     _ACTION("KeepWarmTime", [PREFIX_GET], [], []),
     _ACTION("LockState", [PREFIX_GET, PREFIX_SET], [], []),
     _ACTION("Lower", [], [], []),
-    _ACTION("Mode", [PREFIX_CHANGE, PREFIX_SET], [], ["climate"]),
+    _ACTION("Mode", [PREFIX_CHANGE, PREFIX_SET], [], ["climate", "fan"]),
     _ACTION("Mute", [], [], []),
     _ACTION("Muscle", [PREFIX_GET], [], []),
     _ACTION("Notice", [PREFIX_GET], [], []),
     _ACTION("Open", [], [], []),
     _ACTION("OpenState", [PREFIX_GET], [], []),
     _ACTION("OpenTime", [PREFIX_GET], [], []),
-    _ACTION("Oscillation", [PREFIX_START, PREFIX_STOP], [], ["climate"]),
+    _ACTION("Oscillation", [PREFIX_START, PREFIX_STOP], [], ["climate", "fan"]),
     _ACTION("Package", [PREFIX_GET], [], []),
     _ACTION("Phase", [PREFIX_GET], [], []),
     _ACTION("Power", [PREFIX_CHANGE], [], ["climate"]),
@@ -505,4 +507,10 @@ FAN_MODES = {
 SWING_MODES = {
     "horizontal": SWING_HORIZONTAL,
     "vertical": SWING_VERTICAL
+}
+
+PRESET_MODES = {
+    "auto": fan._NOT_SPEED_AUTO,
+    "baby": fan._NOT_SPEED_SILENT,
+    "sleep": fan._NOT_SPEED_SLEEP
 }
