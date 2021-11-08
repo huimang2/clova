@@ -35,7 +35,7 @@ CEK를 통해 CLOVA와 홈어시스턴트 사이의 커뮤니케이션을 지원
 ### 후원
 
 **카카오 페이** <br>
-![후원](/images/KakaoPay_QR.png)
+![후원](https://github.com/huimang2/clova_ex/blob/main/images/KakaoPay_QR.png)
 
 -----
 # 1. 컴포넌트 설치
@@ -76,31 +76,31 @@ https://developers.naver.com/console/clova/home_ext/DevConsole/Guides/Register_C
 > - **Access token 재발급 URI (선택)**: `https://HA주소/auth/token?>grant_type=refresh_token`
 > - **클라이언트 secret**: `아무 글자나 입력`
 
-![캡쳐1](/images/capture-001.png)
+![캡쳐1](https://github.com/huimang2/clova_ex/blob/main/images/capture-001.png)
 
 **3) 로고는 `250 * 250` 사이즈의 이미지, 배너는 `750 * 500` 사이즈의 이미지를 사용합니다.** <br>
-![캡쳐2](/images/capture-002.png)<br>
-![로고](/images/logo.png)<br>
-![배너](/images/banner.png)
+![캡쳐2](https://github.com/huimang2/clova_ex/blob/main/images/capture-002.png)<br>
+![로고](https://github.com/huimang2/clova_ex/blob/main/images/logo.png)<br>
+![배너](https://github.com/huimang2/clova_ex/blob/main/images/banner.png)
 
 # 3. 클로바에 컴포넌트 연결
 
 **1) 클로바 어플리케이션 다운로드 후 실행** 
 
 **2) 하단에 위치한 `스마트홈 아이콘` 클릭** <br>
-![캡쳐3](/images/capture-003.png)
+![캡쳐3](https://github.com/huimang2/clova_ex/blob/main/images/capture-003.png)
 
 **3) `+ 기기 추가하기` 클릭** <br>
-![캡쳐4](/images/capture-004.png)
+![캡쳐4](https://github.com/huimang2/clova_ex/blob/main/images/capture-004.png)
 
 **4) 추가한 `extension` 클릭** <br>
-![캡쳐5](/images/capture-005.png)
+![캡쳐5](https://github.com/huimang2/clova_ex/blob/main/images/capture-005.png)
 
 **5) `로그인`을 클릭하여 홈어시스턴트 아이디로 로그인** <br>
-![캡쳐6](/images/capture-006.png)
+![캡쳐6](https://github.com/huimang2/clova_ex/blob/main/images/capture-006.png)
 
 **6) 연동된 기기 확인** <br>
-![캡쳐7](/images/capture-007.png)
+![캡쳐7](https://github.com/huimang2/clova_ex/blob/main/images/capture-007.png)
 
 # 4. `configuration.yaml` 설정
 
@@ -427,9 +427,9 @@ clova:
 
 `input_text.test` 구성요소를 만들고 다음과 같이 작성하면 밥솥에 대한 SetMode 액션을 실행할 수 있습니다.
 
-![캡쳐8](/images/capture-009.png)
+![캡쳐9](https://github.com/huimang2/clova_ex/blob/main/images/capture-009.png)
 
-![캡쳐8](/images/capture-010.png)
+![캡쳐10](https://github.com/huimang2/clova_ex/blob/main/images/capture-010.png)
 
 ## 예시
 
@@ -450,7 +450,7 @@ clova:
 
 ```
 
-![캡쳐8](/images/capture-008.png)
+![캡쳐8](https://github.com/huimang2/clova_ex/blob/main/images/capture-008.png)
 
 # 참고
 
