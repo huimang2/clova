@@ -332,6 +332,8 @@ clova:
 `actionDetails`을 설정하여 사용자가 지정한 서비스를 불러오는 것이 가능합니다.
 또한 `allowableValue`를 설정하여 클로바 서버로 해당 액션이 허용하는 값을 전달할 수 있습니다.
 
+액션명은 [클로바 플랫폼 가이드](https://developers.naver.com/console/clova/home_ext/Develop/References/ClovaHomeInterface/Shared_Objects.md#Actions)를 참고하세요.
+
 #### JSON 형식
 ``` JSON
 "actionDetails": {
@@ -453,6 +455,7 @@ clova:
 # 참고
 
 - 네이버 카페 : HomeAssistant (https://cafe.naver.com/koreassistant)
+- 클로바 플랫폼 가이드 (https://developers.naver.com/console/clova/home_ext/)
 
 [version-shield]: https://img.shields.io/badge/version-v1.1.0-orange.svg
 [hakc-shield]: https://img.shields.io/badge/HAKC-Enjoy-blue.svg
