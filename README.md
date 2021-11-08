@@ -52,7 +52,7 @@ CEK를 통해 CLOVA와 홈어시스턴트 사이의 커뮤니케이션을 지원
 
 # 2. CLOVA Home extension 등록
 
-> ### 참고
+> **참고** 
 > * 아래 페이지를 참고하여 CLOVA Home extension을 등록하세요.
 https://developers.naver.com/console/clova/home_ext/DevConsole/Guides/Register_Clova_Home_Extension.md
 >
@@ -60,9 +60,9 @@ https://developers.naver.com/console/clova/home_ext/DevConsole/Guides/Register_C
 >
 > * 심사신청은 하지마세요!
 
-#### 1) [CLOVA Developers Consor β](https://developers.naver.com/console/clova/cek/#/list)에 접속하여 `CLOVA Home extension 만들기`를 클릭하세요.
+**1) [CLOVA Developers Consor β](https://developers.naver.com/console/clova/cek/#/list)에 접속하여 `CLOVA Home extension 만들기`를 클릭하세요.** 
 
-#### 2) 서버 설정은 다음과 같이 입력합니다.<br>
+**2) 서버 설정은 다음과 같이 입력합니다.** <br>
 
 > - **Extension 서버 URL**: `https://HA주소/api/clova`
 > - **로그인 URL**: `https://HA주소/auth/authorize`
@@ -73,28 +73,28 @@ https://developers.naver.com/console/clova/home_ext/DevConsole/Guides/Register_C
 
 ![캡쳐1](/images/capture-001.png)
 
-#### 3) 로고는 `250 * 250` 사이즈의 이미지, 배너는 `750 * 500` 사이즈의 이미지를 사용합니다.<br>
+**3) 로고는 `250 * 250` 사이즈의 이미지, 배너는 `750 * 500` 사이즈의 이미지를 사용합니다.** <br>
 ![캡쳐2](/images/capture-002.png)<br>
 ![로고](/images/logo.png)<br>
 ![배너](/images/banner.png)
 
 # 3. 클로바에 컴포넌트 연결
 
-#### 1) 클로바 어플리케이션 다운로드 후 실행
+**1) 클로바 어플리케이션 다운로드 후 실행** 
 
-#### 2) 하단에 위치한 `스마트홈 아이콘` 클릭<br>
+**2) 하단에 위치한 `스마트홈 아이콘` 클릭** <br>
 ![캡쳐3](/images/capture-003.png)
 
-#### 3) `+ 기기 추가하기` 클릭<br>
+**3) `+ 기기 추가하기` 클릭** <br>
 ![캡쳐4](/images/capture-004.png)
 
-#### 4) 추가한 `extension` 클릭<br>
+**4) 추가한 `extension` 클릭** <br>
 ![캡쳐5](/images/capture-005.png)
 
-#### 5) `로그인`을 클릭하여 홈어시스턴트 아이디로 로그인<br>
+**5) `로그인`을 클릭하여 홈어시스턴트 아이디로 로그인** <br>
 ![캡쳐6](/images/capture-006.png)
 
-#### 6) 연동된 기기 확인<br>
+**6) 연동된 기기 확인** <br>
 ![캡쳐7](/images/capture-007.png)
 
 # 4. `configuration.yaml` 설정
