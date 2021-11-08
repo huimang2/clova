@@ -10,6 +10,7 @@ CEK를 통해 CLOVA와 홈어시스턴트 사이의 커뮤니케이션을 지원
 ### Version history
 | 버전     | 일자        | 내용              |
 | :-----: | :---------: | ----------------------- |
+| **v1.1.2** | 2021.11.08 | 버그 수정 |
 | **v1.1.1** | 2021.11.08 | 버그 수정 |
 | **v1.1.0**  | 2021.11.08  | - 메뉴얼 추가<br>- 스키마 파일(`schema.py`) 추가 <br>- 디바이스 설정 추가<br>- 액션 설정 추가 |
 | **v1.0.2**  | 2021.11.01  | - 오류 수정 <br>- `FAN` 도메인에 대한 모든 액션 추가  |
@@ -458,6 +459,6 @@ clova:
 - 네이버 카페 : HomeAssistant (https://cafe.naver.com/koreassistant)
 - 클로바 플랫폼 가이드 (https://developers.naver.com/console/clova/home_ext/)
 
-[version-shield]: https://img.shields.io/badge/version-v1.1.1-orange.svg
+[version-shield]: https://img.shields.io/badge/version-v1.1.2-orange.svg
 [hakc-shield]: https://img.shields.io/badge/HAKC-Enjoy-blue.svg
 [hacs-shield]: https://img.shields.io/badge/HACS-Custom-red.svg
