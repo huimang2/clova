@@ -49,19 +49,24 @@ tZPLfboZgb5k29XSrOZbrAWrM/v5Zn5mdTrFubBd65wz3+VyJhS0nPmcTPCLCo4q
 """
 
 ATTR_ACCESS_TOKEN = "accessToken"
+ATTR_ACTION = "action"
+ATTR_ACTION_DETAILS = "actionDetails"
 ATTR_ACTIONS = "actions"
 ATTR_ADDITIONAL_APPLIANCE_DETAILS = "additionalApplianceDetails"
+ATTR_ALLOWABLE_VALUE = "allowableValue"
 ATTR_APPLIANCE = "appliance"
 ATTR_APPLIANCE_ID = "applianceId"
 ATTR_APPLIANCE_RESPONSE_TIMESTAMP = "applianceResponseTimestamp"
 ATTR_APPLIANCE_TYPES = "applianceTypes"
 ATTR_CURRENT_TEMPERATUE = "currentTemperature"
 ATTR_CUSTOM_COMMANDS = "customCommands"
+ATTR_DATA = "data"
 ATTR_DIRECTION = "direction"
 ATTR_DISCOVERED_APPLIANCES = "discoveredAppliances"
 ATTR_DELTA_TEMPERATURE = "deltaTemperature"
 ATTR_FAN_SPEED = "fanSpeed"
 ATTR_FRIENDLY_NAME = "friendlyName"
+ATTR_FRIENDLY_DESCRIPTION = "friendlyDescription"
 ATTR_HEADER = "header"
 ATTR_IS_IR = "isIr"
 ATTR_IS_REACHABLE = "isReachable"
@@ -73,12 +78,16 @@ ATTR_MANUFACTURE_NAME = "manufacturerName"
 ATTR_MESSAGE_ID = "messageId"
 ATTR_MODE = "mode"
 ATTR_MODEL_NAME = "modelName"
+ATTR_RESPONSE = "response"
 ATTR_PAYLOAD = "payload"
 ATTR_PAYLOAD_VERSION = "payloadVersion"
 ATTR_PREVIOUS_STATE = "previousState"
+ATTR_SERVICE = "service"
 ATTR_SIGNATURECEK = "signaturecek"
 ATTR_STATES = "states"
+ATTR_TAGS = "tags"
 ATTR_TARGET_TEMPERATURE = "targetTemperature"
+ATTR_TYPE = "type"
 ATTR_UNIT = "unit"
 
 ATTR_VALUE = "value"
@@ -99,15 +108,35 @@ SUFFIX_CONFIRMATION = "Confirmation"
 SUFFIX_OFF = "Off"
 SUFFIX_ON = "On"
 
+CONF_ACTION = "action"
+CONF_ACTION_DETAILS = "actionDetails"
+CONF_ACTIONS = "actions"
+CONF_ALLOWABLE_VALUE = "allowableValue"
+CONF_APPLIANCE_ID = "applianceId"
+CONF_CUSTOM_COMMANDS = "customCommands"
+CONF_DATA = "data"
+CONF_DESCRIPTION = "description"
 CONF_EXPOSE = "expose"
 CONF_ENTITY_CONFIG = "entity_config"
+CONF_ENUM_VALUES = "enumValues"
 CONF_EXPOSE_BY_DEFAULT = "expose_by_default"
 CONF_EXPOSED_DOMAINS = "exposed_domains"
 CONF_LOCATION = "location"
+CONF_MANUFACTURER = "manufacturer"
+CONF_MAX_VALUE = "maxValue"
+CONF_MIN_VALUE = "minValue"
+CONF_MODEL = "model"
+CONF_IR = "ir"
+CONF_RESPONSE = "response"
+CONF_SERVICE = "service"
+CONF_TYPE = "type"
+CONF_TAGS = "tags"
+CONF_VERSION = "version"
 
 TRANSLATION_ONDO = "온도"
 TRANSLATION_SOGDO = "속도"
 
+DEFAULT_IR = False
 DEFAULT_EXPOSE_BY_DEFAULT = True
 DEFAULT_EXPOSED_DOMAINS = [
     "climate",
@@ -170,65 +199,65 @@ LOCATION = {
     "마당": "YARD",
 }
 
-DEVICE_TYPE = [
-    "AIRCONDITIONER",
-    "AIRPURIFIER",
-    "AIRSENSOR",
-    "BIDET",
-    "BODYWEIGHTSCALE",
-    "BUILDING_ELECTRIC_METER",
-    "BUILDING_ELEVATOR_CALLER",
-    "BUILDING_GAS_METER",
-    "BUILDING_HEATING_METER",
-    "BUILDING_HOTWATER_METER",
-    "BUILDING_NOTICE_MONITOR",
-    "BUILDING_PACKAGE",
-    "BUILDING_PARKING_MONITOR",
-    "BUILDING_UTILITY_BILL_MONITOR",
-    "BUILDING_WATER_METER",
-    "CLOTHESCAREMACHINE",
-    "CLOTHESDRYER",
-    "CLOTHESWASHER",
-    "DEHUMIDIFIER",
-    "DISHWASHER",
-    "ELECTRICKETTLE",
-    "ELECTRICTOOTHBRUSH",
-    "FAN",
-    "HEATER",
-    "HOMECAM",
-    "HUMIDIFIER",
-    "KIMCHIREFRIGERATOR",
-    "LIGHT",
-    "MASSAGECHAIR",
-    "MICROWAVE",
-    "MOTIONSENSOR",
-    "OPENCLOSESENSOR",
-    "OVEN",
-    "POWERSTRIP",
-    "PURIFIER",
-    "RANGE",
-    "RANGEHOOD",
-    "REFRIGERATOR",
-    "RICECOOKER",
-    "ROBOTVACUUM",
-    "SETTOPBOX",
-    "SLEEPINGMONITOR",
-    "SMARTBED",
-    "SMARTCHAIR",
-    "SMARTCURTAIN",
-    "SMARTHUB",
-    "SMARTLOCK",
-    "SMARTMETER",
-    "SMARTPLUG",
-    "SMARTTV",
-    "SMARTVALVE",
-    "SMOKESENSOR",
-    "SWITCH",
-    "THERMOSTAT",
-    "VENTILATOR",
-    "WATERBOILER",
-    "WINECELLAR",
-]
+DEVICE_TYPE = {
+	"AIRCONDITIONER" : ["ChangeFanSpeed", "ChangeMode", "ChangePower", "DecrementFanSpeed", "DecrementTargetTemperature", "GetCurrentTemperature", "GetDeviceState", "GetTargetTemperature", "HealthCheck", "IncrementFanSpeed", "IncrementTargetTemperature", "SetFanSpeed", "SetMode", "SetTargetTemperature", "StartOscillation", "StopOscillation", "TurnOff", "TurnOn"],
+	"AIRPURIFIER" : ["ChangeFanSpeed", "ChangeMode", "ChangePower", "DecrementFanSpeed", "GetAirQuality", "GetCurrentTemperature", "GetDeviceState", "GetFineDust", "GetHumidity", "GetUltraFineDust", "HealthCheck", "IncrementFanSpeed", "ReleaseMode", "SetFanSpeed", "SetMode", "TurnOff", "TurnOn"],
+	"AIRSENSOR" : ["GetAirQuality", "GetCurrentTemperature", "GetDeviceState", "GetFineDust", "GetHumidity", "GetUltraFineDust", "HealthCheck"],
+	"BIDET" : ["Close", "GetDeviceState", "GetExpendableState", "HealthCheck", "Open", "TurnOff", "TurnOn"],
+	"BODYWEIGHTSCALE" : ["GetBMI", "GetBatteryInfo", "GetDeviceState", "GetBodyFat", "GetHealthScore", "GetMuscle", "GetWeight", "HealthCheck"],
+	"BUILDING_ELECTRIC_METER" : ["GetConsumption"],
+	"BUILDING_ELEVATOR_CALLER" : ["CallElevator"],
+	"BUILDING_GAS_METER" : ["GetConsumption"],
+	"BUILDING_HEATING_METER" : ["GetConsumption"],
+	"BUILDING_HOTWATER_METER" : ["GetConsumption"],
+	"BUILDING_NOTICE_MONITOR" : ["GetNotice"],
+	"BUILDING_PACKAGE" : ["GetPackage"],
+	"BUILDING_PARKING_MONITOR" : ["GetVehicleLocation"],
+	"BUILDING_UTILITY_BILL_MONITOR" : ["GetCurrentBill"],
+	"BUILDING_WATER_METER" : ["GetConsumption"],
+	"CLOTHESCAREMACHINE" : ["GetDeviceState", "GetPhase", "GetRemainingTime", "HealthCheck", "TurnOff", "TurnOn"],
+	"CLOTHESDRYER" : ["GetDeviceState", "GetPhase", "GetRemainingTime", "HealthCheck", "TurnOff", "TurnOn"],
+	"CLOTHESWASHER" : ["GetDeviceState", "GetPhase", "GetRemainingTime", "HealthCheck", "TurnOff", "TurnOn"],
+	"DEHUMIDIFIER" : ["GetCurrentTemperature", "GetDeviceState", "GetHumidity", "HealthCheck", "SetFanSpeed", "TurnOff", "TurnOn"],
+	"DISHWASHER" : ["GetDeviceState", "GetPhase", "GetRemainingTime", "HealthCheck", "TurnOff", "TurnOn"],
+	"ELECTRICKETTLE" : ["GetCurrentTemperature", "GetDeviceState", "HealthCheck", "TurnOff", "TurnOn"],
+	"ELECTRICTOOTHBRUSH" : ["GetDeviceState", "HealthCheck"],
+	"FAN" : ["DecrementFanSpeed", "GetDeviceState", "HealthCheck", "IncrementFanSpeed", "SetFanSpeed", "SetMode", "StartOscillation", "StopOscillation", "TurnOff", "TurnOn"],
+	"HEATER" : ["DecrementTargetTemperature", "GetCurrentTemperature", "GetDeviceState", "GetTargetTemperature", "HealthCheck", "IncrementTargetTemperature", "SetTargetTemperature", "TurnOff", "TurnOn"],
+	"HOMECAM" : ["GetDetectionCount", "HealthCheck", "ReleaseMode", "SetMode", "StartRecording", "StopRecording", "TurnOff", "TurnOn"],
+	"HUMIDIFIER" : ["GetCurrentTemperature", "GetDeviceState", "GetHumidity", "HealthCheck", "ReleaseMode", "SetFanSpeed", "SetMode", "TurnOff", "TurnOn"],
+	"KIMCHIREFRIGERATOR" : ["GetDeviceState", "HealthCheck"],
+	"LIGHT" : ["DecrementBrightness", "DecrementVolume HealthCheck", "GetDeviceState", "IncrementBrightness", "IncrementVolume", "ReleaseMode", "SetBrightness", "SetColor", "SetColorTemperature", "SetMode", "TurnOff", "TurnOn"],
+	"MASSAGECHAIR" : ["DecrementIntensityLevel", "GetDeviceState", "HealthCheck", "IncrementIntensityLevel", "TurnOff", "TurnOn"],
+	"MICROWAVE" : ["GetDeviceState", "GetRemainingTime", "HealthCheck", "TurnOff", "TurnOn"],
+	"MOTIONSENSOR" : ["GetDetectedTime", "GetDeviceState", "GetPowerState", "HealthCheck", "ReleaseMode", "SetMode", "TurnOff", "TurnOn"],
+	"OPENCLOSESENSOR" : ["GetCloseTime", "GetDeviceState", "GetOpenState", "GetOpenTime", "HealthCheck"],
+	"OVEN" : ["GetDeviceState", "GetRemainingTime", "HealthCheck", "Preheat"],
+	"POWERSTRIP" : ["GetConsumption", "GetDeviceState", "GetEstimateBill", "GetProgressiveTaxBracket", "HealthCheck", "TurnOff", "TurnOn"],
+	"PURIFIER" : ["GetConsumption", "GetDeviceState", "GetExpendableState", "HealthCheck", "ReleaseMode", "SetMode", "SetTargetTemperature"],
+	"RANGE" : ["GetDeviceState", "HealthCheck"],
+	"RANGEHOOD" : ["GetDeviceState", "HealthCheck", "TurnOff", "TurnOn"],
+	"REFRIGERATOR" : ["GetDeviceState", "HealthCheck", "ReleaseMode", "SetMode", "SetTargetTemperature"],
+	"RICECOOKER" : ["GetCleaningCycle", "GetDeviceState", "GetExpendableState", "GetKeepWarmTime", "GetPhase", "GetRemainingTime", "HealthCheck", "ReleaseMode", "SetMode", "Stop", "TurnOff", "TurnOn"],
+	"ROBOTVACUUM" : ["Charge", "GetBatteryInfo", "GetDeviceState", "HealthCheck", "TurnOff", "TurnOn"],
+	"SETTOPBOX" : ["ChangeInputSource", "ChangePower", "DecrementChannel", "DecrementVolume", "GetDeviceState", "HealthCheck", "IncrementChannel", "IncrementVolume", "Mute", "SetChannel", "SetChannelByName", "TurnOff", "TurnOn", "Unmute"],
+	"SLEEPINGMONITOR" : ["GetAsleepDuration", "GetAwakeDuration", "GetDeviceState", "GetSleepScore", "GetSleepStartTime", "HealthCheck", "TurnOff", "TurnOn"],
+	"SMARTBED" : ["GetDeviceState", "HealthCheck", "Lower", "Raise", "Stop"],
+	"SMARTCHAIR" : ["GetCurrentSittingState", "GetDeviceState", "GetRightPostureRatio", "GetUsageTime", "HealthCheck"],
+	"SMARTCURTAIN" : ["Close", "GetDeviceState", "HealthCheck", "Open", "Stop"],
+	"SMARTHUB" : ["GetCurrentTemperature", "GetDeviceState", "GetHumidity", "GetTargetTemperature", "HealthCheck", "SetMode"],
+	"SMARTLOCK" : ["GetDeviceState", "GetLockState", "HealthCheck", "SetLockState"],
+	"SMARTMETER" : ["GetConsumption", "GetCurrentBill", "GetDeviceState", "GetEstimateBill", "GetProgressiveTaxBracket", "HealthCheck"],
+	"SMARTPLUG" : ["GetConsumption", "GetDeviceState", "GetEstimateBill", "HealthCheck", "TurnOff", "TurnOn"],
+	"SMARTTV" : ["ChangeInputSource", "ChangePower", "DecrementChannel", "DecrementVolume", "GetDeviceState", "HealthCheck", "IncrementChannel", "IncrementVolume", "Mute", "SetChannel", "SetChannelByName", "TurnOff", "TurnOn", "Unmute"],
+	"SMARTVALVE" : ["GetDeviceState", "GetLockState", "SetLockState"],
+	"SMOKESENSOR" : ["GetDeviceState", "HealthCheck"],
+	"SWITCH" : ["GetDeviceState", "HealthCheck", "TurnOff", "TurnOn"],
+	"THERMOSTAT" : ["DecrementTargetTemperature", "GetConsumption", "GetCurrentTemperature", "GetDeviceState", "GetEstimateConsumption", "GetTargetTemperature", "HealthCheck", "IncrementTargetTemperature", "SetMode", "SetTargetTemperature TurnOff", "TurnOn"],
+	"VENTILATOR" : ["GetAirQuality", "GetCurrentTemperature", "GetDeviceState", "GetHumidity", "GetTargetTemperature", "HealthCheck", "ReleaseMode", "SetFanSpeed", "SetMode", "TurnOff", "TurnOn"],
+	"WATERBOILER" : ["GetDeviceState", "HealthCheck", "SetMode", "TurnOff", "TurnOn"],
+	"WINECELLAR" : ["GetDeviceState", "HealthCheck", "ReleaseMode", "SetMode", "SetTargetTemperature", "TurnOff", "TurnOn"],
+}
 
 for s in DEVICE_TYPE:
     globals()['TYPE_{}'.format(s)] = s

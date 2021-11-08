@@ -36,7 +36,7 @@ async def async_handle_message(hass, config, message):
     """요청(Request) 메시지에 대한 처리"""
 
     data = RequestData(config, message)
-
+    
     response = await _process(hass, data, message)
         
     if response and response[ATTR_HEADER]['name'] in INTERFACE_ERROR:
@@ -54,6 +54,7 @@ async def _process(hass, data, message):
     try:
         response = await handler(hass, data, message.get(ATTR_PAYLOAD))
     except Exception as e:
+        _LOGGER.error(f"ERROR: {e}")
         if e in INTERFACE_ERROR:
             return sync_serialize(data, e, message.get(ATTR_PAYLOAD))
         else:
@@ -104,7 +105,7 @@ async def DiscoverAppliancesRequest(hass, data, payload):
         data, 
         INTERFACE_DISCOVERY.replace(SUFFIX_REQUEST, SUFFIX_RESPONSE), 
         {
-            ATTR_CUSTOM_COMMANDS: [],
+            ATTR_CUSTOM_COMMANDS: data.config.custom_commands,
             ATTR_DISCOVERED_APPLIANCES: devices
         }
     )

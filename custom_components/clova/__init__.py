@@ -12,39 +12,18 @@ from homeassistant.helpers.typing import ConfigType
 
 from .const import (
     CONF_ENTITY_CONFIG,
-    CONF_EXPOSE,
     CONF_EXPOSE_BY_DEFAULT,
     CONF_EXPOSED_DOMAINS,
-    CONF_LOCATION,
     DEFAULT_EXPOSE_BY_DEFAULT,
     DEFAULT_EXPOSED_DOMAINS,
     DOMAIN,
 )
 
+from .schema import CLOVA_SCHEMA
 from .http import ClovaView, ClovaConfig
 
 _LOGGER = logging.getLogger(__name__)
 
-
-ENTITY_SCHEMA = vol.Schema(
-    {
-        vol.Optional(CONF_NAME): cv.string,
-        vol.Optional(CONF_EXPOSE, default=True): cv.boolean,
-        vol.Optional(CONF_LOCATION): cv.string,
-    }
-)
-
-CLOVA_SCHEMA = vol.Schema(
-    {
-        vol.Optional(
-            CONF_EXPOSE_BY_DEFAULT, default=DEFAULT_EXPOSE_BY_DEFAULT
-        ): cv.boolean,
-        vol.Optional(
-            CONF_EXPOSED_DOMAINS, default=DEFAULT_EXPOSED_DOMAINS
-        ): cv.ensure_list,
-        vol.Optional(CONF_ENTITY_CONFIG): {cv.entity_id: ENTITY_SCHEMA},
-    }
-)
 
 CONFIG_SCHEMA = vol.Schema(
     {vol.Optional(DOMAIN): CLOVA_SCHEMA}, extra=vol.ALLOW_EXTRA

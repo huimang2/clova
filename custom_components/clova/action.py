@@ -107,10 +107,6 @@ class _action:
         self.state = state
         self.config = config
 
-    def sync_attributes(self):
-        """Return attributes for a sync request."""
-        raise NotImplementedError
-
     def can_execute(self, action, params):
         """Test if command can be executed."""
         return action == self.name
@@ -129,9 +125,6 @@ class HealthCheck(_action):
     @staticmethod
     def supported(domain, features, device_class, attributes):
         return domain in _ACTIONS["HealthCheck"].domain
-
-    def sync_attributes(self):
-        return {}
 
     async def execute(self, data, params):
 
@@ -163,9 +156,6 @@ class ChangePower(_action):
     @staticmethod
     def supported(domain, features, device_class, attributes):
         return domain in _ACTIONS["ChangePower"].domain
-
-    def sync_attributes(self):
-        return {}
 
     async def execute(self, data, params):
         await self.hass.services.async_call(
@@ -481,9 +471,6 @@ class GetCurrentTemperature(_action):
             return False
         return domain in _ACTIONS["GetCurrentTemperature"].domain
 
-    def sync_attributes(self):
-        return {}
-
     async def execute(self, data, params):
 
         if (current_temperature := self.state.attributes.get(climate.ATTR_CURRENT_TEMPERATURE)) is None:
@@ -511,9 +498,6 @@ class GetDeviceState(_action):
             ):
             return False
         return domain in _ACTIONS["GetDeviceState"].domain
-
-    def sync_attributes(self):
-        return {}
 
     async def execute(self, data, params):
 
@@ -636,9 +620,6 @@ class {0}{1}({1}, _action):
     @staticmethod
     def supported(domain, features, device_class, attributes):
         return domain in _ACTIONS["{0}{1}"].domain and {2}
-
-    def sync_attributes(self):
-        return {3}
 
     async def execute(self, data, params):
         return await self.pre_process(data, params);
