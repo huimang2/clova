@@ -450,6 +450,10 @@ clova:
 
 ![캡쳐8](/images/capture-008.png)
 
+# 참고
+
+- 네이버 카페 : HomeAssistant (https://cafe.naver.com/koreassistant)
+
 [version-shield]: https://img.shields.io/badge/version-v1.1.0-orange.svg
 [hakc-shield]: https://img.shields.io/badge/HAKC-Enjoy-blue.svg
 [hacs-shield]: https://img.shields.io/badge/HACS-Custom-red.svg
