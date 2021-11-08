@@ -50,7 +50,7 @@ CEK를 통해 CLOVA와 홈어시스턴트 사이의 커뮤니케이션을 지원
 
 ### HACS
 - HACS > Integretions > 우측상단 메뉴 > Custom repositories 선택
-- 'https://github.com/huimang2/clova_ex' 주소 입력, Category에 'integration' 선택 후, 저장
+- 'https://github.com/huimang2/clova' 주소 입력, Category에 'integration' 선택 후, 저장
 - HACS > Integretions 메뉴 선택 후, '[KR] 클로바홈EX' 검색하여 설치
 
 <br>
