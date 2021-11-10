@@ -171,7 +171,7 @@ clova:
       type: SWITCH
       ir: false
       location: LIVING_ROOM
-      tag: [거실]
+      tags: [거실]
       actionDetails: ...
 ```
 
