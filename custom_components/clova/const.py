@@ -539,7 +539,7 @@ SWING_MODES = {
 }
 
 PRESET_MODES = {
-    "auto": fan._NOT_SPEED_AUTO,
-    "baby": fan._NOT_SPEED_SILENT,
-    "sleep": fan._NOT_SPEED_SLEEP
+    "auto": "auto",
+    "baby": "silent",
+    "sleep": "sleep"
 }
