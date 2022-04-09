@@ -350,8 +350,8 @@ class FanSpeed(_action):
         
         # fan 도메인
         elif state.domain == fan.DOMAIN:
-
-            # 현재 퍼센트 확인
+ 
+             # 현재 퍼센트 확인
             current_percent = self.state.attributes.get(fan.ATTR_PERCENTAGE)
    
             # 퍼센트 설정
@@ -535,6 +535,7 @@ class Oscillation(_action):
                 raise Exception(ERR_UNSUPPORTED_OPERATION_ERROR)
 
             HA_modes = [_ for _ in self.state.attributes.get(climate.ATTR_SWING_MODES) if _ != climate.SWING_OFF]
+            clova_modes = {y: x for x, y in SWING_MODES.items() if y and y in HA_modes}
             
             current_mode = self.state.state
             
@@ -588,7 +589,6 @@ class Oscillation(_action):
                     },
                     blocking=True,
                 )
-                
         # 응답 메시지 작성
         payload = {}
 
