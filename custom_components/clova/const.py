@@ -1,7 +1,7 @@
 """CLOVA Home extension 상수"""
 
 import re
-from collections import namedtuple
+from typing import NamedTuple
 
 from homeassistant.components import (
     binary_sensor,
@@ -11,7 +11,6 @@ from homeassistant.components import (
     fan,
     group,
     humidifier,
-    input_boolean,
     light,
     lock,
     media_player,
@@ -34,7 +33,7 @@ from homeassistant.components.climate.const import (
 
 DOMAIN = "clova"
 
-CLOVA_API_ENDPOINT = "/api/clova"
+CLOVA_API_ENDPOINT = f"/api/{DOMAIN}"
 
 SIGNATURE_PUBLIC_KEY = b"""
 -----BEGIN PUBLIC KEY-----
@@ -285,7 +284,12 @@ DEVICE_CLASS_TO_CLOVA_TYPES = {
     (humidifier.DOMAIN, humidifier.DEVICE_CLASS_DEHUMIDIFIER): TYPE_DEHUMIDIFIER,
 }
 
-_ACTION = namedtuple("_ACTION", "name prefix suffix domain")
+class _ACTION(NamedTuple):
+    name: str
+    prefix: str
+    suffix: str
+    domain: str
+
 _ACTIONS = [
     _ACTION("AirQuality", [PREFIX_START, PREFIX_STOP], [], []),
     _ACTION("AirQuality", [PREFIX_GET], [], []),
@@ -487,7 +491,14 @@ INTERFACE_CONTROL = (
     INTERFACE_GET
 )
 
-ACTION = namedtuple("ACTION", "name request response domain prefix suffix")
+class ACTION(NamedTuple):
+    name: str
+    request: str
+    response: str
+    domain: str
+    prefix: str
+    suffix: str
+
 ACTIONS = { 
     y[0]: ACTION(
         y[0], 
