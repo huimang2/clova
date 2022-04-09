@@ -351,7 +351,7 @@ class FanSpeed(_action):
         # fan 도메인
         elif state.domain == fan.DOMAIN:
  
-             # 현재 퍼센트 확인
+            # 현재 퍼센트 확인
             current_percent = self.state.attributes.get(fan.ATTR_PERCENTAGE)
    
             # 퍼센트 설정
