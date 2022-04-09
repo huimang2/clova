@@ -10,14 +10,7 @@ from homeassistant.core import HomeAssistant, ServiceCall
 from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.typing import ConfigType
 
-from .const import (
-    CONF_ENTITY_CONFIG,
-    CONF_EXPOSE_BY_DEFAULT,
-    CONF_EXPOSED_DOMAINS,
-    DEFAULT_EXPOSE_BY_DEFAULT,
-    DEFAULT_EXPOSED_DOMAINS,
-    DOMAIN,
-)
+from .const import DOMAIN
 
 from .schema import CLOVA_SCHEMA
 from .http import ClovaView, ClovaConfig

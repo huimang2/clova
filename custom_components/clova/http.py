@@ -21,13 +21,6 @@ from cryptography.hazmat.backends import default_backend
 from cryptography.exceptions import InvalidSignature
 
 from .const import (
-    CONF_ACTION,
-    CONF_ACTIONS,
-    CONF_CUSTOM_COMMANDS,
-    CONF_ENTITY_CONFIG,
-    CONF_EXPOSE,
-    CONF_EXPOSE_BY_DEFAULT,
-    CONF_EXPOSED_DOMAINS,
     ATTR_ACCESS_TOKEN,
     ATTR_ACTION,
     ATTR_ACTIONS,
@@ -36,7 +29,14 @@ from .const import (
     ATTR_NAME,
     ATTR_PAYLOAD,
     ATTR_SIGNATURECEK,
-    CLOVA_API_ENDPOINT, 
+    CONF_ACTION,
+    CONF_ACTIONS,
+    CONF_CUSTOM_COMMANDS,
+    CONF_ENTITY_CONFIG,
+    CONF_EXPOSE,
+    CONF_EXPOSE_BY_DEFAULT,
+    CONF_EXPOSED_DOMAINS,
+    CLOVA_API_ENDPOINT,
     SIGNATURE_PUBLIC_KEY,
     ERR_VALIDATION_FAILED_ERROR
 )
@@ -44,12 +44,6 @@ from .helpers import AbstractConfig
 from .interface import async_handle_message
 
 _LOGGER = logging.getLogger(__name__)
-
-
-async def async_setup(hass):
-    """Enable the Area Registry views."""
-    _LOGGER.error("요게 되네?")
-    return True
 
 
 class ClovaConfig(AbstractConfig):
