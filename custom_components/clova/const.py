@@ -527,9 +527,9 @@ FAN_MODES = {
 
     fan.DOMAIN : 
     {
-        1: fan.SPEED_LOW,
-        2: fan.SPEED_MEDIUM,
-        3: fan.SPEED_HIGH,
+        1: 30,
+        2: 60,
+        3: 100,
     }
 }
 
@@ -539,7 +539,7 @@ SWING_MODES = {
 }
 
 PRESET_MODES = {
-    "auto": fan._NOT_SPEED_AUTO,
-    "baby": fan._NOT_SPEED_SILENT,
-    "sleep": fan._NOT_SPEED_SLEEP
+    "auto": "auto",
+    "baby": "silent",
+    "sleep": "sleep"
 }

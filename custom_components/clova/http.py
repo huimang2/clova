@@ -113,7 +113,6 @@ class ClovaView(HomeAssistantView):
     
     # POST 요청
     async def post(self, request: Request) -> Response:
-        _LOGGER.error(request.app["hass"])
         message: dict = await request.json()
         signature_base64: string = request.headers.get(ATTR_SIGNATURECEK)
         signature: bytes = base64.b64decode(signature_base64)

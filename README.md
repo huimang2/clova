@@ -10,7 +10,11 @@ CEK를 통해 CLOVA와 홈어시스턴트 사이의 커뮤니케이션을 지원
 ### Version history
 | 버전     | 일자        | 내용              |
 | :-----: | :---------: | ----------------------- |
-| **v1.1.0**  | 2021.11.06  | - 메뉴얼 추가<br>- 스키마 파일(`schema.py`) 추가 <br>- 디바이스 설정 추가<br>- 액션 설정 추가 |
+| **v1.1.4** | 2022.04.09 | 코어 업데이트로 인한 오류 수정 |
+| **v1.1.3** | 2022.02.04 | 코어 업데이트로 인한 오류 수정 |
+| **v1.1.2** | 2021.11.08 | 버그 수정 |
+| **v1.1.1** | 2021.11.08 | 버그 수정 |
+| **v1.1.0**  | 2021.11.08  | - 메뉴얼 추가<br>- 스키마 파일(`schema.py`) 추가 <br>- 디바이스 설정 추가<br>- 액션 설정 추가 |
 | **v1.0.2**  | 2021.11.01  | - 오류 수정 <br>- `FAN` 도메인에 대한 모든 액션 추가  |
 | **v1.0.1**  | 2021.10.31  | String.json 파일과 translations 폴더 삭제  |
 | **v1.0.0**  | 2021.10.31  | First version  |
@@ -35,7 +39,7 @@ CEK를 통해 CLOVA와 홈어시스턴트 사이의 커뮤니케이션을 지원
 ### 후원
 
 **카카오 페이** <br>
-![후원](/images/KakaoPay_QR.png)
+![후원](https://github.com/huimang2/clova_ex/blob/main/images/KakaoPay_QR.png)
 
 -----
 # 1. 컴포넌트 설치
@@ -76,31 +80,31 @@ https://developers.naver.com/console/clova/home_ext/DevConsole/Guides/Register_C
 > - **Access token 재발급 URI (선택)**: `https://HA주소/auth/token?>grant_type=refresh_token`
 > - **클라이언트 secret**: `아무 글자나 입력`
 
-![캡쳐1](/images/capture-001.png)
+![캡쳐1](https://github.com/huimang2/clova_ex/blob/main/images/capture-001.png)
 
 **3) 로고는 `250 * 250` 사이즈의 이미지, 배너는 `750 * 500` 사이즈의 이미지를 사용합니다.** <br>
-![캡쳐2](/images/capture-002.png)<br>
-![로고](/images/logo.png)<br>
-![배너](/images/banner.png)
+![캡쳐2](https://github.com/huimang2/clova_ex/blob/main/images/capture-002.png)<br>
+![로고](https://github.com/huimang2/clova_ex/blob/main/images/logo.png)<br>
+![배너](https://github.com/huimang2/clova_ex/blob/main/images/banner.png)
 
 # 3. 클로바에 컴포넌트 연결
 
 **1) 클로바 어플리케이션 다운로드 후 실행** 
 
 **2) 하단에 위치한 `스마트홈 아이콘` 클릭** <br>
-![캡쳐3](/images/capture-003.png)
+![캡쳐3](https://github.com/huimang2/clova_ex/blob/main/images/capture-003.png)
 
 **3) `+ 기기 추가하기` 클릭** <br>
-![캡쳐4](/images/capture-004.png)
+![캡쳐4](https://github.com/huimang2/clova_ex/blob/main/images/capture-004.png)
 
 **4) 추가한 `extension` 클릭** <br>
-![캡쳐5](/images/capture-005.png)
+![캡쳐5](https://github.com/huimang2/clova_ex/blob/main/images/capture-005.png)
 
 **5) `로그인`을 클릭하여 홈어시스턴트 아이디로 로그인** <br>
-![캡쳐6](/images/capture-006.png)
+![캡쳐6](https://github.com/huimang2/clova_ex/blob/main/images/capture-006.png)
 
 **6) 연동된 기기 확인** <br>
-![캡쳐7](/images/capture-007.png)
+![캡쳐7](https://github.com/huimang2/clova_ex/blob/main/images/capture-007.png)
 
 # 4. `configuration.yaml` 설정
 
@@ -169,20 +173,20 @@ clova:
       type: SWITCH
       ir: false
       location: LIVING_ROOM
-      tag: [거실]
+      tags: [거실]
       actionDetails: ...
 ```
 
 | 변수 | 자료형 | 필수/선택 | 설명 |
 | :--: | :--: | :------: |---- |
-| **expose** | *Boolean* | 선택 | 구성요소별로 노출여부를 설정합니다. 기본값은 **`True`** 입니다.
+| **expose** | *boolean* | 선택 | 구성요소별로 노출여부를 설정합니다. 기본값은 **`True`** 입니다.
 | **name** | *str* | 선택 | 클로바에 명시되는 디바이스명 입니다.
 | **manufacturer** | *str* | 선택 | 클로바에 명시되는 제조사명 입니다.
 | **model** | *str* | 선택 | 클로바에 명시되는 모델명 입니다.
 | **version** | *str* | 선택 | 클로바에 명시되는 버전 입니다.
 | **description** | *str* | 선택 | 클로바에 명시되는 디바이스 설명 입니다.
 | **type** | *str* | 선택 | 클로바에서 인식하는 지정된 디바이스 타입으로 변경합니다.
-| **ir** | *str* | 선택 | 디바이스가 적외선 기능을 사용하는지를 나타냅니다. 기본값은 **`False`**입니다.
+| **ir** | *boolean* | 선택 | 디바이스가 적외선 기능을 사용하는지를 나타냅니다. 기본값은 **`False`** 입니다.
 | **location** | *str* | 선택 | 클로바에서 인식하는 지정된 장소명 입니다.
 | **tags** | *list* [] | 선택 | 클로바에서 설정하는 그룹명 입니다. 여러 그룹을 설정 가능합니다.
 | **actionDetails** | *dict array*<br>[dict] | 선택 | 구성요소의 액션에 대한 세부사항을 설정합니다.
@@ -427,9 +431,9 @@ clova:
 
 `input_text.test` 구성요소를 만들고 다음과 같이 작성하면 밥솥에 대한 SetMode 액션을 실행할 수 있습니다.
 
-![캡쳐8](/images/capture-009.png)
+![캡쳐9](https://github.com/huimang2/clova_ex/blob/main/images/capture-009.png)
 
-![캡쳐8](/images/capture-010.png)
+![캡쳐10](https://github.com/huimang2/clova_ex/blob/main/images/capture-010.png)
 
 ## 예시
 
@@ -450,13 +454,13 @@ clova:
 
 ```
 
-![캡쳐8](/images/capture-008.png)
+![캡쳐8](https://github.com/huimang2/clova_ex/blob/main/images/capture-008.png)
 
 # 참고
 
 - 네이버 카페 : HomeAssistant (https://cafe.naver.com/koreassistant)
 - 클로바 플랫폼 가이드 (https://developers.naver.com/console/clova/home_ext/)
 
-[version-shield]: https://img.shields.io/badge/version-v1.1.0-orange.svg
+[version-shield]: https://img.shields.io/badge/version-v1.1.4-orange.svg
 [hakc-shield]: https://img.shields.io/badge/HAKC-Enjoy-blue.svg
 [hacs-shield]: https://img.shields.io/badge/HACS-Custom-red.svg

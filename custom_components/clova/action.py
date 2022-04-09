@@ -128,8 +128,6 @@ class HealthCheck(_action):
 
     async def execute(self, data, params):
 
-        entity_id = params[ATTR_APPLIANCE][ATTR_APPLIANCE_ID]
-
         if (state := self.state) is None:
             raise Exception(ERR_NO_SUCH_TARGET_ERROR)
 
@@ -138,9 +136,6 @@ class HealthCheck(_action):
 
         if state.domain == climate.DOMAIN:
             payload[ATTR_IS_TURN_ON] = state.state in state.attributes.get(climate.ATTR_HVAC_MODES) and state.state != climate.HVAC_MODE_OFF
-
-        elif state.domain == fan.DOMAIN:
-                payload[ATTR_IS_TURN_ON] = state.attributes[ATTR_SPEED] not in OFF_SPEED_VALUES if ATTR_SPEED in state.attributes else state.state == STATE_ON
 
         else:
             payload[ATTR_IS_TURN_ON] = state.state == STATE_ON
@@ -355,43 +350,35 @@ class FanSpeed(_action):
         
         # fan 도메인
         elif state.domain == fan.DOMAIN:
-            if self.state.attributes.get(fan.ATTR_SPEED_LIST) is None:
-                raise Exception(ERR_UNSUPPORTED_OPERATION_ERROR)
 
-            # 현재 모드 확인
-            HA_modes = self.state.attributes.get(fan.ATTR_SPEED_LIST)
-            current_mode = self.state.attributes.get(fan.ATTR_SPEED)
+            # 현재 퍼센트 확인
+            current_percent = self.state.attributes.get(fan.ATTR_PERCENTAGE)
    
-            # 모드 설정
+            # 퍼센트 설정
             
             filds = {ATTR_ENTITY_ID: self.state.entity_id}
 
-            if prefix == PREFIX_DECREMENT:
+            if (prefix := data.prefix) == PREFIX_DECREMENT:
                 service = fan.SERVICE_INCREASE_SPEED
 
             elif prefix == PREFIX_INCREMENT:
                 service = fan.SERVICE_DECREASE_SPEED
 
             elif prefix == PREFIX_SET:
-                next_mode = FAN_MODES[fan.DOMAIN].get(params[ATTR_FAN_SPEED][ATTR_VALUE])
-
-                if not next_mode:
-                    next_mode = HA_modes[0]
-
-                filds[fan.ATTR_SPEED] = next_mode
-                service = fan.SERVICE_SET_SPEED
+                next_percent = [x for x in FAN_MODES[fan.DOMAIN] if x >= current_percent][0]
+                filds[fan.ATTR_PERCENTAGE] = next_percent
+                service = fan.SERVICE_SET_PERCENTAGE
 
             else:
                 raise Exception(ERR_UNSUPPORTED_OPERATION_ERROR)
             
             # 액션 실행
-            if next_mode != current_mode:
-                await self.hass.services.async_call(
-                    fan.DOMAIN,
-                    service,
-                    filds,
-                    blocking=True,
-                )
+            await self.hass.services.async_call(
+                fan.DOMAIN,
+                service,
+                filds,
+                blocking=True,
+            )
 
             # 응답 메시지 작성
             payload = {}
@@ -480,7 +467,7 @@ class GetCurrentTemperature(_action):
         payload[ATTR_CURRENT_TEMPERATUE] = {ATTR_VALUE: int(current_temperature)}
         payload[ATTR_APPLIANCE_RESPONSE_TIMESTAMP] = datetime.now().astimezone().replace(microsecond=0).isoformat()
         
-        return payload;
+        return payload
 
 
 @register_action
@@ -548,7 +535,6 @@ class Oscillation(_action):
                 raise Exception(ERR_UNSUPPORTED_OPERATION_ERROR)
 
             HA_modes = [_ for _ in self.state.attributes.get(climate.ATTR_SWING_MODES) if _ != climate.SWING_OFF]
-            clova_modes = {y: x for x, y in SWING_MODES.items() if y and y in HA_modes}
             
             current_mode = self.state.state
             
@@ -602,6 +588,7 @@ class Oscillation(_action):
                     },
                     blocking=True,
                 )
+                
         # 응답 메시지 작성
         payload = {}
 
@@ -633,7 +620,7 @@ for _ in [SUFFIX_ON, SUFFIX_OFF]))
 """ 모드 전환 액션 """
 exec(''.join(BASE_ACTION_TEMPLATE.format(_, "Mode", '''(
 ( domain == climate.DOMAIN ) or 
-( (domain == fan.DOMAIN) and (features & fan.SUPPORT_PRESET_MODE) )
+( (domain == fan.DOMAIN) and (features & fan.FanEntityFeature.PRESET_MODE) )
 )''', "{}")
 for _ in [PREFIX_SET, PREFIX_CHANGE]))
 
@@ -641,7 +628,7 @@ for _ in [PREFIX_SET, PREFIX_CHANGE]))
 """ 팬 속도 조절 액션 """
 exec(''.join(BASE_ACTION_TEMPLATE.format(_, "FanSpeed", '''(
 ( (features & climate.SUPPORT_FAN_MODE) and (domain == climate.DOMAIN) ) or 
-( (features & fan.SUPPORT_SET_SPEED) and (domain == fan.DOMAIN) )
+( (features & fan.FanEntityFeature.SET_SPEED) and (domain == fan.DOMAIN) )
 )''', "{}") for _ in [PREFIX_SET, PREFIX_CHANGE, PREFIX_INCREMENT, PREFIX_DECREMENT]))
 
 
@@ -653,6 +640,6 @@ for _ in [PREFIX_SET, PREFIX_GET, PREFIX_INCREMENT, PREFIX_DECREMENT]))
 """ 스윙 모드 액션 """
 exec(''.join(BASE_ACTION_TEMPLATE.format( _, "Oscillation", '''(
 ( (features & climate.SUPPORT_SWING_MODE) and (domain == climate.DOMAIN) ) or
-( (features & fan.SUPPORT_OSCILLATE) and (domain == fan.DOMAIN) )
+( (features & fan.FanEntityFeature.OSCILLATE) and (domain == fan.DOMAIN) )
 )''', "{}")
 for _ in [PREFIX_START, PREFIX_STOP]))
