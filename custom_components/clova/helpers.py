@@ -16,9 +16,7 @@ from homeassistant.const import (
     CONF_NAME,
 )
 from homeassistant.core import HomeAssistant, State, callback
-from homeassistant.helpers.area_registry import AreaEntry
-from homeassistant.helpers.device_registry import DeviceEntry
-from homeassistant.helpers.entity_registry import RegistryEntry
+from homeassistant.helpers import area_registry, device_registry, entity_registry
 from homeassistant.helpers import template
 
 from .action import ACTIONS
@@ -76,32 +74,33 @@ from .const import (
 _LOGGER = logging.getLogger(__name__)
 
 
-async def _get_entity_and_device(
-    hass, entity_id
-) -> tuple[RegistryEntry, DeviceEntry] | None:
-    """entity_id에 대한 entity와 device entry를 가져옴"""
-    dev_reg, ent_reg = await gather(
-        hass.helpers.device_registry.async_get_registry(),
-        hass.helpers.entity_registry.async_get_registry(),
-    )
+@callback
+def _get_registry_entries(
+    hass: HomeAssistant, entity_id: str
+) -> tuple[device_registry.DeviceEntry, area_registry.AreaEntry]:
+    """Get registry entries."""
+    ent_reg = entity_registry.async_get(hass)
+    dev_reg = device_registry.async_get(hass)
+    area_reg = area_registry.async_get(hass)
 
-    if not (entity_entry := ent_reg.async_get(entity_id)):
-        return None, None
-    device_entry = dev_reg.devices.get(entity_entry.device_id)
-    return entity_entry, device_entry
+    if (entity_entry := ent_reg.async_get(entity_id)) and entity_entry.device_id:
+        device_entry = dev_reg.devices.get(entity_entry.device_id)
+    else:
+        device_entry = None
 
-
-async def _get_area(hass, entity_entry, device_entry) -> AreaEntry | None:
-    """ entity에 대한 장소 계산 """
     if entity_entry and entity_entry.area_id:
         area_id = entity_entry.area_id
     elif device_entry and device_entry.area_id:
         area_id = device_entry.area_id
     else:
-        return None
+        area_id = None
 
-    area_reg = await hass.helpers.area_registry.async_get_registry()
-    return area_reg.areas.get(area_id)
+    if area_id is not None:
+        area_entry = area_reg.async_get_area(area_id)
+    else:
+        area_entry = None
+
+    return device_entry, area_entry
 
 
 class AbstractConfig(ABC):
@@ -215,9 +214,7 @@ class ClovaEntity:
         name = (entity_config.get(CONF_NAME) or state.name).strip()
         domain = state.domain
         device_class = state.attributes.get(ATTR_DEVICE_CLASS)
-        entity_entry, device_entry = await _get_entity_and_device(
-            self.hass, state.entity_id
-        )
+        device_entry, area_entry = _get_registry_entries(self.hass, state.entity_id)
 
         actions = self.actions()
         device_type = entity_config.get(CONF_TYPE) or get_clova_type(domain, device_class)
@@ -255,12 +252,11 @@ class ClovaEntity:
         if location := entity_config.get(CONF_LOCATION):
             device[ATTR_LOCATION] = location
         else:
-            area = await _get_area(self.hass, entity_entry, device_entry)
-            if area and area.name:
-                if LOCATION.get(area.name):
-                    device[ATTR_LOCATION] = LOCATION.get(area.name)
+            if area_entry and area_entry.name:
+                if LOCATION.get(area_entry.name):
+                    device[ATTR_LOCATION] = LOCATION.get(area_entry.name)
                 else:
-                    device[ATTR_TAGS] = [area.name]
+                    device[ATTR_TAGS] = [area_entry.name]
 
         if description := entity_config.get(CONF_DESCRIPTION):
             device[ATTR_FRIENDLY_DESCRIPTION] = description
