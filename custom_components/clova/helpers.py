@@ -73,7 +73,6 @@ from .const import (
 
 _LOGGER = logging.getLogger(__name__)
 
-
 @callback
 def _get_registry_entries(
     hass: HomeAssistant, entity_id: str
@@ -101,6 +100,19 @@ def _get_registry_entries(
         area_entry = None
 
     return device_entry, area_entry
+
+
+async def _get_area(hass, entity_entry, device_entry) -> AreaEntry | None:
+    """ entity에 대한 장소 계산 """
+    if entity_entry and entity_entry.area_id:
+        area_id = entity_entry.area_id
+    elif device_entry and device_entry.area_id:
+        area_id = device_entry.area_id
+    else:
+        return None
+
+    area_reg = await hass.helpers.area_registry.async_get_registry()
+    return area_reg.areas.get(area_id)
 
 
 class AbstractConfig(ABC):
@@ -150,7 +162,7 @@ def get_clova_type(domain, device_class):
     """ 도메인(domain)과 기기 클레스(device class)에 따른 CLOVA 타입 설정 """
     typ = DEVICE_CLASS_TO_CLOVA_TYPES.get((domain, device_class))
     
-    return typ if typ is not None else DOMAIN_TO_CLOVA_TYPES.get(domain)
+    return typ or DOMAIN_TO_CLOVA_TYPES.get(domain)
 
 class ClovaEntity:
     """ CLOVA 구성요소 추상화 클래스 """

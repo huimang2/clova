@@ -25,6 +25,7 @@ from .const import (
     ATTR_ACTION,
     ATTR_ACTIONS,
     ATTR_APPLIANCE_ID,
+    ATTR_CONFIG,
     ATTR_HEADER,
     ATTR_NAME,
     ATTR_PAYLOAD,
@@ -37,6 +38,7 @@ from .const import (
     CONF_EXPOSE_BY_DEFAULT,
     CONF_EXPOSED_DOMAINS,
     CLOVA_API_ENDPOINT,
+    DOMAIN,
     SIGNATURE_PUBLIC_KEY,
     ERR_VALIDATION_FAILED_ERROR
 )
@@ -49,10 +51,10 @@ _LOGGER = logging.getLogger(__name__)
 class ClovaConfig(AbstractConfig):
     """ CLOVA Home extension 수동 설정 """
 
-    def __init__(self, hass, config):
+    def __init__(self, hass):
         """ config 초기화 """
         super().__init__(hass)
-        self._config = config
+        self._config = hass.data[DOMAIN][ATTR_CONFIG]
 
     @property
     def entity_config(self):
