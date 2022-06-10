@@ -358,10 +358,10 @@ class FanSpeed(_action):
             
             filds = {ATTR_ENTITY_ID: self.state.entity_id}
 
-            if (prefix := data.prefix) == PREFIX_DECREMENT:
+            if (prefix := data.prefix) == PREFIX_INCREMENT:
                 service = fan.SERVICE_INCREASE_SPEED
 
-            elif prefix == PREFIX_INCREMENT:
+            elif prefix == PREFIX_DECREMENT:
                 service = fan.SERVICE_DECREASE_SPEED
 
             elif prefix == PREFIX_SET:
