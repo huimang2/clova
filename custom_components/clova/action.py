@@ -7,23 +7,8 @@ import re
 from datetime import datetime
 
 from homeassistant.components import (
-    alarm_control_panel,
-    binary_sensor,
-    camera,
-    cover,
     fan,
     group,
-    input_boolean,
-    input_select,
-    light,
-    lock,
-    media_player,
-    scene,
-    script,
-    select,
-    sensor,
-    switch,
-    vacuum,
 )
 from homeassistant.components.climate import const as climate
 from homeassistant.components.humidifier import const as humidifier
@@ -32,26 +17,14 @@ from homeassistant.components.media_player.const import MEDIA_TYPE_CHANNEL
 from homeassistant.const import (
     ATTR_ENTITY_ID,
     ATTR_TEMPERATURE,
-    CONF_NAME,
     SERVICE_TURN_OFF,
     SERVICE_TURN_ON,
-    STATE_IDLE,
-    STATE_LOCKED,
     STATE_OFF,
     STATE_ON,
-    STATE_PAUSED,
-    STATE_PLAYING,
-    STATE_STANDBY,
-    STATE_UNAVAILABLE,
-    STATE_UNKNOWN,
-    TEMP_CELSIUS,
-    TEMP_FAHRENHEIT,
 )
 from homeassistant.core import DOMAIN as HA_DOMAIN
 
 from .const import (
-    ATTR_APPLIANCE,
-    ATTR_APPLIANCE_ID,
     ATTR_APPLIANCE_RESPONSE_TIMESTAMP,
     ATTR_CURRENT_TEMPERATUE,
     ATTR_DELTA_TEMPERATURE,
@@ -121,7 +94,7 @@ class _action:
 class HealthCheck(_action):
     """ 상태 확인 액션 """
     name = "HealthCheck"
- 
+
     @staticmethod
     def supported(domain, features, device_class, attributes):
         return domain in _ACTIONS["HealthCheck"].domain
@@ -147,15 +120,15 @@ class HealthCheck(_action):
 class ChangePower(_action):
     """ 전원 상태 변환 액션 """
     name = "ChangePower"
- 
+
     @staticmethod
     def supported(domain, features, device_class, attributes):
         return domain in _ACTIONS["ChangePower"].domain
 
     async def execute(self, data, params):
         await self.hass.services.async_call(
-            HA_DOMAIN 
-            if (service_domain := self.state.domain) == group.DOMAIN 
+            HA_DOMAIN
+            if (service_domain := self.state.domain) == group.DOMAIN
             else service_domain,
             SERVICE_TURN_ON if self.state.state == STATE_OFF else SERVICE_TURN_ON,
             {ATTR_ENTITY_ID: self.state.entity_id},
@@ -168,8 +141,8 @@ class Turn(_action):
 
     async def pre_process(self, data, params):
         await self.hass.services.async_call(
-            HA_DOMAIN 
-            if (service_domain := self.state.domain) == group.DOMAIN 
+            HA_DOMAIN
+            if (service_domain := self.state.domain) == group.DOMAIN
             else service_domain,
             SERVICE_TURN_OFF if data.suffix == SUFFIX_OFF else SERVICE_TURN_ON,
             {ATTR_ENTITY_ID: self.state.entity_id},
@@ -186,15 +159,15 @@ class Mode(_action):
 
         # climate 도메인
         if state.domain == climate.DOMAIN:
-            
+
             if self.state.attributes.get(climate.ATTR_HVAC_MODES) is None:
                 raise Exception(ERR_UNSUPPORTED_OPERATION_ERROR)
 
             HA_modes = [_ for _ in self.state.attributes.get(climate.ATTR_HVAC_MODES) if _ != climate.HVAC_MODE_OFF]
             clova_modes = {y: x for x, y in HVAC_MODES.items() if y and y in HA_modes}
-            
+
             current_mode = self.state.state
-            
+
             # 순서 확인
             if current_mode in HA_modes:
                 idx = HA_modes.index(current_mode)
@@ -204,7 +177,7 @@ class Mode(_action):
 
             else:
                 raise Exception(ERR_DRIVER_INTERNAL_ERROR)
-            
+
             # 모드 설정
             if (prefix := data.prefix) == PREFIX_CHANGE:
                 next_mode = HA_modes[idx+1 if idx+1 < len(HA_modes) else 0]
@@ -214,7 +187,7 @@ class Mode(_action):
 
                 if not next_mode:
                     next_mode = HA_modes[0]
-                
+
             else:
                 raise Exception(ERR_UNSUPPORTED_OPERATION_ERROR)
 
@@ -248,15 +221,15 @@ class Mode(_action):
 
             HA_modes = [_ for _ in self.state.attributes.get(fan.ATTR_PRESET_MODES) if _ not in fan.OFF_SPEED_VALUES ]
             clova_modes = {y: x for x, y in HVAC_MODES.items() if y and y in HA_modes}
-            
+
             current_mode = self.state.attributes.get(fan.ATTR_PRESET_MODE)
-            
+
             if data.prefix == PREFIX_SET:
                 next_mode = PRESET_MODES.get(params[ATTR_MODE][ATTR_VALUE])
 
                 if not next_mode:
                     next_mode = HA_modes[0]
-                
+
             else:
                 raise Exception(ERR_UNSUPPORTED_OPERATION_ERROR)
 
@@ -282,32 +255,32 @@ class Mode(_action):
             raise Exception(ERR_UNSUPPORTED_OPERATION_ERROR)
 
         return payload
-        
+
 
 class FanSpeed(_action):
     """ 팬 속도 조절 액션 전처리 """
 
     async def pre_process(self, data, params):
-        
+
         state = self.state
 
         # climate 도메인
         if state.domain == climate.DOMAIN:
             if self.state.attributes.get(climate.ATTR_FAN_MODES) is None:
                 raise Exception(ERR_UNSUPPORTED_OPERATION_ERROR)
-            
+
             # 현재 모드 확인
             HA_modes = self.state.attributes.get(climate.ATTR_FAN_MODES)
             clova_modes = {y: x for x, y in FAN_MODES[climate.DOMAIN].items() if y and y in HA_modes}
 
             current_mode = self.state.attributes.get(climate.ATTR_FAN_MODE)
-            
+
             # 순서 확인
             if current_mode in HA_modes:
                 idx = HA_modes.index(current_mode)
             else:
                 raise Exception(ERR_DRIVER_INTERNAL_ERROR)
-            
+
             # 모드 설정
             if (prefix := data.prefix) == PREFIX_CHANGE:
                 next_mode = HA_modes[idx+1 if idx+1 < len(HA_modes) else 0]
@@ -326,7 +299,7 @@ class FanSpeed(_action):
 
             else:
                 raise Exception(ERR_DRIVER_INTERNAL_ERROR)
-            
+
             # 액션 실행
             if next_mode != current_mode:
                 await self.hass.services.async_call(
@@ -338,7 +311,7 @@ class FanSpeed(_action):
                     },
                     blocking=True,
                 )
-            
+
             # 응답 메시지 작성
             payload = {}
 
@@ -347,15 +320,15 @@ class FanSpeed(_action):
 
             if current_mode := clova_modes.get(next_mode):
                 payload[ATTR_FAN_SPEED] = {ATTR_VALUE:current_mode}
-        
+
         # fan 도메인
         elif state.domain == fan.DOMAIN:
- 
+
             # 현재 퍼센트 확인
             current_percent = self.state.attributes.get(fan.ATTR_PERCENTAGE)
-   
+
             # 퍼센트 설정
-            
+
             filds = {ATTR_ENTITY_ID: self.state.entity_id}
 
             if (prefix := data.prefix) == PREFIX_INCREMENT:
@@ -371,7 +344,7 @@ class FanSpeed(_action):
 
             else:
                 raise Exception(ERR_UNSUPPORTED_OPERATION_ERROR)
-            
+
             # 액션 실행
             await self.hass.services.async_call(
                 fan.DOMAIN,
@@ -393,25 +366,25 @@ class TargetTemperature(_action):
     """ 온도 조절 액션 전처리 """
 
     async def pre_process(self, data, params):
-        
+
         if (target_temperature := self.state.attributes.get(ATTR_TEMPERATURE)) is None:
             raise Exception(ERR_UNSUPPORTED_OPERATION_ERROR)
-        
+
         # 온도 확인
         target_temperature = int(target_temperature)
         set_target_temperature = target_temperature
-        
+
         # 최대/최소 온도 확인
         min_temp = int(self.state.attributes.get(climate.ATTR_MIN_TEMP, 7))
         max_temp = int(self.state.attributes.get(climate.ATTR_MAX_TEMP, 35))
-        
+
         # 온도 설정
         if (prefix := data.prefix) == PREFIX_SET:
             set_target_temperature = params[ATTR_TARGET_TEMPERATURE][ATTR_VALUE]
 
         elif prefix == PREFIX_INCREMENT:
             set_target_temperature += params[ATTR_DELTA_TEMPERATURE][ATTR_VALUE]
-            
+
             if set_target_temperature > max_temp:
                 set_target_temperature = max_temp
 
@@ -420,7 +393,7 @@ class TargetTemperature(_action):
 
             if set_target_temperature < min_temp:
                 set_target_temperature = min_temp
-        
+
         # 액션 실행
         if  target_temperature != set_target_temperature:
             await self.hass.services.async_call(
@@ -432,7 +405,7 @@ class TargetTemperature(_action):
                 },
                 blocking=True,
             )
-        
+
         # 응답 메시지 작성
         payload = {}
         payload[ATTR_TARGET_TEMPERATURE] = {ATTR_VALUE: set_target_temperature}
@@ -451,10 +424,10 @@ class GetCurrentTemperature(_action):
     """ 온도 확인 액션 """
 
     name = "GetCurrentTemperature"
- 
+
     @staticmethod
     def supported(domain, features, device_class, attributes):
-        if attributes.get(climate.ATTR_CURRENT_TEMPERATURE) is None: 
+        if attributes.get(climate.ATTR_CURRENT_TEMPERATURE) is None:
             return False
         return domain in _ACTIONS["GetCurrentTemperature"].domain
 
@@ -466,7 +439,7 @@ class GetCurrentTemperature(_action):
         payload = {}
         payload[ATTR_CURRENT_TEMPERATUE] = {ATTR_VALUE: int(current_temperature)}
         payload[ATTR_APPLIANCE_RESPONSE_TIMESTAMP] = datetime.now().astimezone().replace(microsecond=0).isoformat()
-        
+
         return payload
 
 
@@ -475,7 +448,7 @@ class GetDeviceState(_action):
     """ 상태 확인 액션 """
 
     name = "GetDeviceState"
- 
+
     @staticmethod
     def supported(domain, features, device_class, attributes):
         if (
@@ -493,7 +466,7 @@ class GetDeviceState(_action):
         payload = {}
         devices = []
         device = {}
-        
+
         # climate 도메인
         if state.domain == climate.DOMAIN:
 
@@ -519,7 +492,7 @@ class GetDeviceState(_action):
         devices.append(device)
         payload[ATTR_STATES] = devices
         payload[ATTR_APPLIANCE_RESPONSE_TIMESTAMP] = datetime.now().astimezone().replace(microsecond=0).isoformat()
- 
+
         return payload
 
 
@@ -527,7 +500,7 @@ class Oscillation(_action):
     """ 스윙 모드 액션 전처리"""
 
     async def pre_process(self, data, params):
-   
+
         # climate 도메인
         if self.state.domain == climate.DOMAIN:
 
@@ -536,9 +509,9 @@ class Oscillation(_action):
 
             HA_modes = [_ for _ in self.state.attributes.get(climate.ATTR_SWING_MODES) if _ != climate.SWING_OFF]
             clova_modes = {y: x for x, y in SWING_MODES.items() if y and y in HA_modes}
-            
+
             current_mode = self.state.state
-            
+
             # 순서 확인
             if current_mode in HA_modes:
                 idx = HA_modes.index(current_mode)
@@ -548,7 +521,7 @@ class Oscillation(_action):
 
             else:
                 raise Exception(ERR_DRIVER_INTERNAL_ERROR)
-            
+
             # 모드 설정
             if (prefix := data.prefix) == PREFIX_START:
                 next_mode = HA_modes[idx+1 if idx+1 < len(HA_modes) else 0]
@@ -603,7 +576,7 @@ BASE_ACTION_TEMPLATE = '''
 class {0}{1}({1}, _action):
 
     name = "{0}{1}"
- 
+
     @staticmethod
     def supported(domain, features, device_class, attributes):
         return domain in _ACTIONS["{0}{1}"].domain and {2}
@@ -619,7 +592,7 @@ for _ in [SUFFIX_ON, SUFFIX_OFF]))
 
 """ 모드 전환 액션 """
 exec(''.join(BASE_ACTION_TEMPLATE.format(_, "Mode", '''(
-( domain == climate.DOMAIN ) or 
+( domain == climate.DOMAIN ) or
 ( (domain == fan.DOMAIN) and (features & fan.FanEntityFeature.PRESET_MODE) )
 )''', "{}")
 for _ in [PREFIX_SET, PREFIX_CHANGE]))
@@ -627,7 +600,7 @@ for _ in [PREFIX_SET, PREFIX_CHANGE]))
 
 """ 팬 속도 조절 액션 """
 exec(''.join(BASE_ACTION_TEMPLATE.format(_, "FanSpeed", '''(
-( (features & climate.SUPPORT_FAN_MODE) and (domain == climate.DOMAIN) ) or 
+( (features & climate.SUPPORT_FAN_MODE) and (domain == climate.DOMAIN) ) or
 ( (features & fan.FanEntityFeature.SET_SPEED) and (domain == fan.DOMAIN) )
 )''', "{}") for _ in [PREFIX_SET, PREFIX_CHANGE, PREFIX_INCREMENT, PREFIX_DECREMENT]))
 

@@ -19,17 +19,14 @@ from homeassistant.components import (
 )
 
 from homeassistant.components.climate.const import (
-    HVAC_MODE_AUTO,
-    HVAC_MODE_COOL,
-    HVAC_MODE_DRY, 
-    HVAC_MODE_FAN_ONLY, 
-    HVAC_MODE_HEAT, 
+    HVACMode,
     FAN_LOW,
     FAN_MEDIUM,
     FAN_HIGH,
     SWING_VERTICAL,
     SWING_HORIZONTAL
 )
+
 
 DOMAIN = "clova"
 
@@ -276,12 +273,12 @@ DOMAIN_TO_CLOVA_TYPES = {
 }
 
 DEVICE_CLASS_TO_CLOVA_TYPES = {
-    (switch.DOMAIN, switch.DEVICE_CLASS_SWITCH): TYPE_SWITCH,
-    (binary_sensor.DOMAIN, binary_sensor.DEVICE_CLASS_OPENING): TYPE_OPENCLOSESENSOR,
-    (binary_sensor.DOMAIN, binary_sensor.DEVICE_CLASS_WINDOW): TYPE_OPENCLOSESENSOR,
-    (media_player.DOMAIN, media_player.DEVICE_CLASS_TV): TYPE_SMARTTV,
-    (humidifier.DOMAIN, humidifier.DEVICE_CLASS_HUMIDIFIER): TYPE_HUMIDIFIER,
-    (humidifier.DOMAIN, humidifier.DEVICE_CLASS_DEHUMIDIFIER): TYPE_DEHUMIDIFIER,
+    (switch.DOMAIN, switch.SwitchDeviceClass.SWITCH.value): TYPE_SWITCH,
+    (binary_sensor.DOMAIN, binary_sensor.BinarySensorDeviceClass.OPENING.value): TYPE_OPENCLOSESENSOR,
+    (binary_sensor.DOMAIN, binary_sensor.BinarySensorDeviceClass.WINDOW.value): TYPE_OPENCLOSESENSOR,
+    (media_player.DOMAIN, media_player.MediaPlayerDeviceClass.TV.value): TYPE_SMARTTV,
+    (humidifier.DOMAIN, humidifier.HumidifierDeviceClass.HUMIDIFIER.value): TYPE_HUMIDIFIER,
+    (humidifier.DOMAIN, humidifier.HumidifierDeviceClass.DEHUMIDIFIER.value): TYPE_DEHUMIDIFIER,
 }
 
 class _ACTION(NamedTuple):
@@ -484,7 +481,7 @@ INTERFACE_GET = [
 ]
 
 INTERFACE_CONTROL = (
-    INTERFACE_VALUE_SETTING + 
+    INTERFACE_VALUE_SETTING +
     INTERFACE_INCREMENTAL +
     INTERFACE_SWITCHING +
     INTERFACE_ACTION +
@@ -499,15 +496,15 @@ class ACTION(NamedTuple):
     prefix: str
     suffix: str
 
-ACTIONS = { 
+ACTIONS = {
     y[0]: ACTION(
-        y[0], 
-        '{}{}'.format(y[0],SUFFIX_REQUEST), 
-        '{}{}'.format(y[0],SUFFIX_RESPONSE if "{}{}".format(y[0], SUFFIX_REQUEST) in INTERFACE_GET else SUFFIX_CONFIRMATION), 
+        y[0],
+        '{}{}'.format(y[0],SUFFIX_REQUEST),
+        '{}{}'.format(y[0],SUFFIX_RESPONSE if "{}{}".format(y[0], SUFFIX_REQUEST) in INTERFACE_GET else SUFFIX_CONFIRMATION),
         x.domain,
         y[1],
         y[2]
-    ) 
+    )
     for x in _ACTIONS
     for y in [
         ('{}{}{}'.format(_, x.name, __), _, __)
@@ -517,26 +514,26 @@ ACTIONS = {
 }
 
 HVAC_MODES =  {
-    "auto": HVAC_MODE_AUTO,
-    "cool":  HVAC_MODE_COOL,
-    "dehumidify": HVAC_MODE_DRY, 
-    "fan": HVAC_MODE_FAN_ONLY, 
-    "heat": HVAC_MODE_HEAT, 
-    "powercool": "", 
-    "powersaving": "", 
+    "auto": HVACMode.AUTO.value,
+    "cool":  HVACMode.COOL.value,
+    "dehumidify": HVACMode.DRY.value,
+    "fan": HVACMode.FAN_ONLY.value,
+    "heat": HVACMode.HEAT.value,
+    "powercool": "",
+    "powersaving": "",
     "sleep": ""
 }
 
 FAN_MODES = {
 
-    climate.DOMAIN : 
+    climate.DOMAIN :
     {
         1: FAN_LOW,
         2: FAN_MEDIUM,
         3: FAN_HIGH,
     },
 
-    fan.DOMAIN : 
+    fan.DOMAIN :
     {
         1: 30,
         2: 60,

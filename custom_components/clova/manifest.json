@@ -1,7 +1,7 @@
 {
   "domain": "clova",
   "name": "CLOVA Home extension",
-  "version": "1.2.1",
+  "version": "2025.1.1",
   "documentation": "https://github.com/huimang2/clova",
   "requirements": [],
   "dependencies": ["http"],
