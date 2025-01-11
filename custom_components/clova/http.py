@@ -11,20 +11,18 @@ from homeassistant.const import (
     CONF_ENTITY_ID,
     CONF_NAME,
 )
-from homeassistant.helpers import entity_registry as er
-from homeassistant.helpers.aiohttp_client import async_get_clientsession
 
 from cryptography.hazmat.primitives.serialization import load_pem_public_key
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.hazmat.backends import default_backend
-from cryptography.exceptions import InvalidSignature
 
 from .const import (
     ATTR_ACCESS_TOKEN,
     ATTR_ACTION,
     ATTR_ACTIONS,
     ATTR_APPLIANCE_ID,
+    ATTR_CONFIG,
     ATTR_HEADER,
     ATTR_NAME,
     ATTR_PAYLOAD,
@@ -37,6 +35,7 @@ from .const import (
     CONF_EXPOSE_BY_DEFAULT,
     CONF_EXPOSED_DOMAINS,
     CLOVA_API_ENDPOINT,
+    DOMAIN,
     SIGNATURE_PUBLIC_KEY,
     ERR_VALIDATION_FAILED_ERROR
 )
@@ -49,10 +48,10 @@ _LOGGER = logging.getLogger(__name__)
 class ClovaConfig(AbstractConfig):
     """ CLOVA Home extension 수동 설정 """
 
-    def __init__(self, hass, config):
+    def __init__(self, hass):
         """ config 초기화 """
         super().__init__(hass)
-        self._config = config
+        self._config = hass.data[DOMAIN][ATTR_CONFIG]
 
     @property
     def entity_config(self):
@@ -104,13 +103,13 @@ class ClovaView(HomeAssistantView):
     def __init__(self, config):
         """ CEK 요청 핸들러 초기화 """
         self.config = config
-    
+
     # POST 요청
     async def post(self, request: Request) -> Response:
         message: dict = await request.json()
         signature_base64: string = request.headers.get(ATTR_SIGNATURECEK)
         signature: bytes = base64.b64decode(signature_base64)
-  
+
         # 디지털 서명 검증
         try:
             load_pem_public_key(
@@ -130,8 +129,8 @@ class ClovaView(HomeAssistantView):
 
         """ 요청 메시지 처리 """
         response = await async_handle_message(
-            request.app["hass"], 
-            self.config, 
+            request.app["hass"],
+            self.config,
             message
         )
 

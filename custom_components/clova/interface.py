@@ -4,7 +4,6 @@ import logging
 import re
 
 from homeassistant.util.decorator import Registry
-from homeassistant.const import STATE_ON, STATE_OFF
 
 from .helpers import ClovaEntity, RequestData, async_get_entities
 from .const import (
@@ -36,9 +35,9 @@ async def async_handle_message(hass, config, message):
     """요청(Request) 메시지에 대한 처리"""
 
     data = RequestData(config, message)
-    
+
     response = await _process(hass, data, message)
-        
+
     if response and response[ATTR_HEADER]['name'] in INTERFACE_ERROR:
         _LOGGER.error("Error handling message %s: %s", message, response.get(ATTR_HEADER).get(ATTR_NAME))
 
@@ -102,8 +101,8 @@ async def DiscoverAppliancesRequest(hass, data, payload):
             devices.append(result)
 
     return sync_serialize(
-        data, 
-        INTERFACE_DISCOVERY.replace(SUFFIX_REQUEST, SUFFIX_RESPONSE), 
+        data,
+        INTERFACE_DISCOVERY.replace(SUFFIX_REQUEST, SUFFIX_RESPONSE),
         {
             ATTR_CUSTOM_COMMANDS: data.config.custom_commands,
             ATTR_DISCOVERED_APPLIANCES: devices

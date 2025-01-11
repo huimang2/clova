@@ -1,9 +1,6 @@
 """CLOVA Home extension - 액션 처리"""
 from __future__ import annotations
 
-import logging
-import re
-
 from datetime import datetime
 
 from homeassistant.components import (
@@ -11,9 +8,6 @@ from homeassistant.components import (
     group,
 )
 from homeassistant.components.climate import const as climate
-from homeassistant.components.humidifier import const as humidifier
-from homeassistant.components.lock import STATE_JAMMED, STATE_UNLOCKING
-from homeassistant.components.media_player.const import MEDIA_TYPE_CHANNEL
 from homeassistant.const import (
     ATTR_ENTITY_ID,
     ATTR_TEMPERATURE,
@@ -59,11 +53,7 @@ from .const import (
     TRANSLATION_SOGDO
 )
 
-_LOGGER = logging.getLogger(__name__)
-
-
 ACTIONS = []
-
 
 def register_action(action):
     """Decorate a function to register action."""
