@@ -10,6 +10,7 @@ CEK를 통해 CLOVA와 홈어시스턴트 사이의 커뮤니케이션을 지원
 ### Version history
 | 버전     | 일자        | 내용              |
 | :-----: | :---------: | ----------------------- |
+| **v2025.2.1** | 2025.02.10 | HA 2025.1 패치로 deprecated된 의존성 교체 - 누락된 의존성 수정 |
 | **v2025.1.1** | 2025.01.11 | HA 2025.1 패치로 deprecated된 의존성 교체 |
 | **v1.2.0** | 2022.06.09 | 코어 업데이트로 인한 deprecated된 코드 수정 |
 | **v1.1.5** | 2022.04.09 | 코어 업데이트로 인한 오류 수정 |
@@ -63,7 +64,7 @@ CEK를 통해 CLOVA와 홈어시스턴트 사이의 커뮤니케이션을 지원
 
 # 2. CLOVA Home extension 등록
 
-> **참고** 
+> **참고**
 > * 아래 페이지를 참고하여 CLOVA Home extension을 등록하세요.
 https://developers.naver.com/console/clova/home_ext/DevConsole/Guides/Register_Clova_Home_Extension.md
 >
@@ -71,7 +72,7 @@ https://developers.naver.com/console/clova/home_ext/DevConsole/Guides/Register_C
 >
 > * 심사신청은 하지마세요!
 
-**1) [CLOVA Developers Consor β](https://developers.naver.com/console/clova/cek/#/list)에 접속하여 `CLOVA Home extension 만들기`를 클릭하세요.** 
+**1) [CLOVA Developers Consor β](https://developers.naver.com/console/clova/cek/#/list)에 접속하여 `CLOVA Home extension 만들기`를 클릭하세요.**
 
 **2) 서버 설정은 다음과 같이 입력합니다.** <br>
 
@@ -91,7 +92,7 @@ https://developers.naver.com/console/clova/home_ext/DevConsole/Guides/Register_C
 
 # 3. 클로바에 컴포넌트 연결
 
-**1) 클로바 어플리케이션 다운로드 후 실행** 
+**1) 클로바 어플리케이션 다운로드 후 실행**
 
 **2) 하단에 위치한 `스마트홈 아이콘` 클릭** <br>
 ![캡쳐3](https://github.com/huimang2/clova_ex/blob/main/images/capture-003.png)
@@ -463,6 +464,6 @@ clova:
 - 네이버 카페 : HomeAssistant (https://cafe.naver.com/koreassistant)
 - 클로바 플랫폼 가이드 (https://developers.naver.com/console/clova/home_ext/)
 
-[version-shield]: https://img.shields.io/badge/version-v2025.1.1-orange.svg
+[version-shield]: https://img.shields.io/badge/version-v2025.2.1-orange.svg
 [hakc-shield]: https://img.shields.io/badge/HAKC-Enjoy-blue.svg
 [hacs-shield]: https://img.shields.io/badge/HACS-Custom-red.svg

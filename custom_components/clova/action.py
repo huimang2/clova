@@ -98,7 +98,7 @@ class HealthCheck(_action):
         payload[ATTR_IS_REACHABLE] = True
 
         if state.domain == climate.DOMAIN:
-            payload[ATTR_IS_TURN_ON] = state.state in state.attributes.get(climate.ATTR_HVAC_MODES) and state.state != climate.HVAC_MODE_OFF
+            payload[ATTR_IS_TURN_ON] = state.state in state.attributes.get(climate.ATTR_HVAC_MODES) and state.state != climate.HVACAction.OFF
 
         else:
             payload[ATTR_IS_TURN_ON] = state.state == STATE_ON
@@ -153,7 +153,7 @@ class Mode(_action):
             if self.state.attributes.get(climate.ATTR_HVAC_MODES) is None:
                 raise Exception(ERR_UNSUPPORTED_OPERATION_ERROR)
 
-            HA_modes = [_ for _ in self.state.attributes.get(climate.ATTR_HVAC_MODES) if _ != climate.HVAC_MODE_OFF]
+            HA_modes = [_ for _ in self.state.attributes.get(climate.ATTR_HVAC_MODES) if _ != climate.HVACAction.OFF]
             clova_modes = {y: x for x, y in HVAC_MODES.items() if y and y in HA_modes}
 
             current_mode = self.state.state
@@ -162,7 +162,7 @@ class Mode(_action):
             if current_mode in HA_modes:
                 idx = HA_modes.index(current_mode)
 
-            elif current_mode == climate.HVAC_MODE_OFF:
+            elif current_mode == climate.HVACAction.OFF:
                 idx = -1
 
             else:
@@ -590,19 +590,19 @@ for _ in [PREFIX_SET, PREFIX_CHANGE]))
 
 """ 팬 속도 조절 액션 """
 exec(''.join(BASE_ACTION_TEMPLATE.format(_, "FanSpeed", '''(
-( (features & climate.SUPPORT_FAN_MODE) and (domain == climate.DOMAIN) ) or
+( (features & climate.ClimateEntityFeature.FAN_MODE) and (domain == climate.DOMAIN) ) or
 ( (features & fan.FanEntityFeature.SET_SPEED) and (domain == fan.DOMAIN) )
 )''', "{}") for _ in [PREFIX_SET, PREFIX_CHANGE, PREFIX_INCREMENT, PREFIX_DECREMENT]))
 
 
 """ 온도 조절 액션 """
-exec(''.join(BASE_ACTION_TEMPLATE.format(_,"TargetTemperature", "(features & climate.SUPPORT_TARGET_TEMPERATURE) ", "{}")
+exec(''.join(BASE_ACTION_TEMPLATE.format(_,"TargetTemperature", "(features & climate.ClimateEntityFeature.TARGET_TEMPERATURE) ", "{}")
 for _ in [PREFIX_SET, PREFIX_GET, PREFIX_INCREMENT, PREFIX_DECREMENT]))
 
 
 """ 스윙 모드 액션 """
 exec(''.join(BASE_ACTION_TEMPLATE.format( _, "Oscillation", '''(
-( (features & climate.SUPPORT_SWING_MODE) and (domain == climate.DOMAIN) ) or
+( (features & climate.ClimateEntityFeature.SWING_MODE) and (domain == climate.DOMAIN) ) or
 ( (features & fan.FanEntityFeature.OSCILLATE) and (domain == fan.DOMAIN) )
 )''', "{}")
 for _ in [PREFIX_START, PREFIX_STOP]))
