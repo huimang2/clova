@@ -209,7 +209,7 @@ class Mode(_action):
             if self.state.attributes.get(fan.ATTR_PRESET_MODES) is None:
                 raise Exception(ERR_UNSUPPORTED_OPERATION_ERROR)
 
-            HA_modes = [_ for _ in self.state.attributes.get(fan.ATTR_PRESET_MODES) if _ not in fan.OFF_SPEED_VALUES ]
+            HA_modes = [_ for _ in self.state.attributes.get(fan.ATTR_PRESET_MODES) if _ not in ["off", None] ]
             clova_modes = {y: x for x, y in HVAC_MODES.items() if y and y in HA_modes}
 
             current_mode = self.state.attributes.get(fan.ATTR_PRESET_MODE)
