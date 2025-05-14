@@ -21,6 +21,7 @@ from homeassistant.helpers.template import Template
 from homeassistant.components import websocket_api
 from homeassistant.components.websocket_api import ActiveConnection, event_message
 from homeassistant.config_entries import ConfigEntry
+from homeassistant.components.frontend import async_register_built_in_panel
 
 from .const import (
     ATTR_CONFIG,
@@ -95,7 +96,8 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
 
     # 패널 설정
     if DOMAIN not in hass.data.get("frontend_panels", {}):
-        hass.components.frontend.async_register_built_in_panel(
+        async_register_built_in_panel(
+            hass=hass,
             component_name="custom",
             sidebar_title=SIDEBAR_TITLE,
             sidebar_icon=ICON,
