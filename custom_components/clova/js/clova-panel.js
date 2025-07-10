@@ -152,7 +152,7 @@ function e(e,t,i,o){var n,a=arguments.length,s=a<3?t:null===o?o=Object.getOwnPro
 				margin: -4px -16px -4px 0;
 				padding: 4px 16px;
 			}
-		`}async _valueChanged(e){var t,i;const o=e.target,n="paper-listbox"==o.localName.toLowerCase()?o.selectedItem.value:"ha-switch"==o.localName.toLowerCase()?o.checked:o.value;(null===(i=null===(t=this.config)||void 0===t?void 0:t.entity_config)||void 0===i?void 0:i[o.key])!=n&&se()._ws_connection.sendMessage({type:"clova/update",entity_id:this.entity_id,key:o.key,value:n})}async _typeChanged(e){var t,i;ge.includes(e.detail.value)&&(this.type=e.detail.value),(null===(i=null===(t=this.config)||void 0===t?void 0:t.entity_config)||void 0===i?void 0:i.type)!=this.type&&se()._ws_connection.sendMessage({type:"clova/update",entity_id:this.entity_id,key:"type",value:this.type})}};e([ie({type:Object})],Ee.prototype,"hass",void 0),e([ie({type:String})],Ee.prototype,"entity_id",void 0),e([ie({type:Object})],Ee.prototype,"config",void 0),e([ie({type:Boolean})],Ee.prototype,"expose_by_default",void 0),e([ie({type:String})],Ee.prototype,"type",void 0),Ee=e([ee("clova-info-basic")],Ee);let Oe=class extends(ue(pe(Y))){constructor(){super(...arguments),this._curIndex=0,this._customActions=[],this._remainActions=[],this._actionDetail={},this._action="",this._service="",this._serviceData={},this._responseData={}}render(){var e,t,i,o,n,a,s;return this._customActions=Object.keys((null===(e=this.config.entity_config)||void 0===e?void 0:e.actionDetails)||{}).filter((e=>ye(this.type).includes(e)))||[],this._action=this._customActions[this._curIndex]||"",this._remainActions=ye(this.type).filter((e=>!this._customActions.includes(e)||e===this._action))||[],this._actionDetail=(null===(i=Object.values((null===(t=this.config.entity_config)||void 0===t?void 0:t.actionDetails)||{}))||void 0===i?void 0:i[this._curIndex])||{},this._service=(null===(o=this._actionDetail)||void 0===o?void 0:o.service)||"",this._serviceData=this._action&&this._service?{service:(null===(n=this._actionDetail)||void 0===n?void 0:n.service)||"",data:(null===(a=this._actionDetail)||void 0===a?void 0:a.data)||{}}:{},this._responseData=(null===(s=this._actionDetail)||void 0===s?void 0:s.response)||{},R`			
+		`}async _valueChanged(e){var t,i;const o=e.target,n="paper-listbox"==o.localName.toLowerCase()?o.selectedItem.value:"ha-switch"==o.localName.toLowerCase()?o.checked:o.value;(null===(i=null===(t=this.config)||void 0===t?void 0:t.entity_config)||void 0===i?void 0:i[o.key])!=n&&se()._ws_connection.sendMessage({type:"clova/update",entity_id:this.entity_id,key:o.key,value:n})}async _typeChanged(e){var t,i;ge.includes(e.detail.value)&&(this.type=e.detail.value),(null===(i=null===(t=this.config)||void 0===t?void 0:t.entity_config)||void 0===i?void 0:i.type)!=this.type&&se()._ws_connection.sendMessage({type:"clova/update",entity_id:this.entity_id,key:"type",value:this.type})}};e([ie({type:Object})],Ee.prototype,"hass",void 0),e([ie({type:String})],Ee.prototype,"entity_id",void 0),e([ie({type:Object})],Ee.prototype,"config",void 0),e([ie({type:Boolean})],Ee.prototype,"expose_by_default",void 0),e([ie({type:String})],Ee.prototype,"type",void 0),Ee=e([ee("clova-info-basic")],Ee);let Oe=class extends(ue(pe(Y))){constructor(){super(...arguments),this._curIndex=0,this._customActions=[],this._remainActions=[],this._actionDetail={},this._action="",this._service="",this._serviceData={},this._responseData={}}render(){var e,t,i,o,n,a,s;return this._customActions=Object.keys((null===(e=this.config.entity_config)||void 0===e?void 0:e.actionDetails)||{}).filter((e=>ye(this.type).includes(e)))||[],this._action=this._customActions[this._curIndex]||"",this._remainActions=ye(this.type).filter((e=>!this._customActions.includes(e)||e===this._action))||[],this._actionDetail=(null===(i=Object.values((null===(t=this.config.entity_config)||void 0===t?void 0:t.actionDetails)||{}))||void 0===i?void 0:i[this._curIndex])||{},this._service=(null===(o=this._actionDetail)||void 0===o?void 0:o.service)||"",this._serviceData=this._action&&this._service?{service:(null===(n=this._actionDetail)||void 0===n?void 0:n.service)||"",data:(null===(a=this._actionDetail)||void 0===a?void 0:a.data)||{}}:{},this._responseData=(null===(s=this._actionDetail)||void 0===s?void 0:s.response)||{},R`
 			<div class="card-config">
 				<div class="toolbar">
 					<paper-tabs
@@ -246,7 +246,7 @@ function e(e,t,i,o){var n,a=arguments.length,s=a<3?t:null===o?o=Object.getOwnPro
 							${this.title}
 						</div>
 					</ha-header-bar>
-					<mwc-tab-bar 
+					<mwc-tab-bar
 						.activeIndex=${this._curTabIndex}
 						@MDCTabBar:activated=${this._handleTabActivated}
 					>
@@ -379,20 +379,20 @@ function e(e,t,i,o){var n,a=arguments.length,s=a<3?t:null===o?o=Object.getOwnPro
 				box-sizing: border-box;
 			}
 			.content {
-				display: grid; 
-				grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
-				gap: 16px; 
-				padding: 8px 16px 16px; 
-				margin-bottom: 64px; 
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+				gap: 16px;
+				padding: 8px 16px 16px;
+				margin-bottom: 64px;
 			}
-			.header { 
-				display: flex; 
-				position: relative; 
-				padding: 0px 8px 8px 16px; 
+			.header {
+				display: flex;
+				position: relative;
+				padding: 0px 8px 8px 16px;
 			}
-			.header .info { 
-				flex: 1 1 0%; 
-				align-self: center; 
+			.header .info {
+				flex: 1 1 0%;
+				align-self: center;
 			}
 			.header .info div {
 				overflow-wrap: break-word;
@@ -416,6 +416,7 @@ function e(e,t,i,o){var n,a=arguments.length,s=a<3?t:null===o?o=Object.getOwnPro
 			}
 			.expose {
 				min-height: 35px;
+				margin-top: 16px;
 				display: var(--layout-horizontal_-_display);
 				-webkit-align-items: var(--layout-center_-_-webkit-align-items);
 				align-items: var(--layout-center_-_align-items);

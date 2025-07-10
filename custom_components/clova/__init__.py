@@ -22,6 +22,7 @@ from homeassistant.components import websocket_api
 from homeassistant.components.websocket_api import ActiveConnection, event_message
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.components.frontend import async_register_built_in_panel
+from homeassistant.components.http import StaticPathConfig
 
 from .const import (
     ATTR_CONFIG,
@@ -71,7 +72,9 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     websocket_api.async_register_command(hass, websocket_update)
 
     # js 파일 경로 설정
-    hass.http.register_static_path(PATH_BASE, PATH_JS.format(hass.config.config_dir), cache_headers=False)
+    await hass.http.async_register_static_paths([
+        StaticPathConfig(PATH_BASE, PATH_JS.format(hass.config.config_dir), False)
+    ])
 
     # js 파일 추가
     if DATA_EXTRA_MODULE_URL not in hass.data:
