@@ -10,6 +10,7 @@ CEK를 통해 CLOVA와 홈어시스턴트 사이의 커뮤니케이션을 지원
 ### Version history
 | 버전     | 일자        | 내용              |
 | :-----: | :---------: | ----------------------- |
+| **v2025.11.0** | 2025.11.14 | deprecated된 template 모듈 의존성 대응 |
 | **v2025.2.2** | 2025.02.11 | HA 2025.1 패치로 deprecated된 의존성 교체 - 누락된 의존성 수정 |
 | **v2025.2.1** | 2025.02.10 | HA 2025.1 패치로 deprecated된 의존성 교체 - 누락된 의존성 수정 |
 | **v2025.1.1** | 2025.01.11 | HA 2025.1 패치로 deprecated된 의존성 교체 |
@@ -465,6 +466,6 @@ clova:
 - 네이버 카페 : HomeAssistant (https://cafe.naver.com/koreassistant)
 - 클로바 플랫폼 가이드 (https://developers.naver.com/console/clova/home_ext/)
 
-[version-shield]: https://img.shields.io/badge/version-v2025.2.2-orange.svg
+[version-shield]: https://img.shields.io/badge/version-v2025.11.0-orange.svg
 [hakc-shield]: https://img.shields.io/badge/HAKC-Enjoy-blue.svg
 [hacs-shield]: https://img.shields.io/badge/HACS-Custom-red.svg

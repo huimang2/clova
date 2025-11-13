@@ -161,12 +161,12 @@ class RequestData:
 def get_clova_type(domain, device_class):
     """ 도메인(domain)과 기기 클레스(device class)에 따른 CLOVA 타입 설정 """
     typ = DEVICE_CLASS_TO_CLOVA_TYPES.get((domain, device_class))
-    
+
     return typ or DOMAIN_TO_CLOVA_TYPES.get(domain)
 
 class ClovaEntity:
     """ CLOVA 구성요소 추상화 클래스 """
-    
+
     def __init__(
         self, hass: HomeAssistant, config: AbstractConfig, state: State
     ) -> None:
@@ -221,7 +221,7 @@ class ClovaEntity:
         """ 디바이스 조회 응답(Response) 메시지 직렬화 """
 
         state = self.state
-        
+
         entity_config = self.config.entity_config.get(state.entity_id, {})
         name = (entity_config.get(CONF_NAME) or state.name).strip()
         domain = state.domain
@@ -253,7 +253,7 @@ class ClovaEntity:
             ATTR_APPLIANCE_TYPES: [device_type.upper()],
             ATTR_ADDITIONAL_APPLIANCE_DETAILS: action_details if action_details.get(ATTR_ACTION_DETAILS) else  {}
         }
-        
+
         if device_entry:
             device.update( {
                 ATTR_MANUFACTURE_NAME: device_entry.manufacturer,
@@ -304,7 +304,7 @@ class ClovaEntity:
             }
 
         if isinstance(value, str):
-            
+
             for _ in set(re.findall(r"@([\w\.]+)@", value)):
                 __ = params.copy()
                 for ___ in _.split("."):
@@ -313,7 +313,7 @@ class ClovaEntity:
                     else: break
                 if __:
                     value = value.replace(f"@{_}@", str(__))
-                
+
             return value
 
         return value
@@ -333,8 +333,7 @@ class ClovaEntity:
         # 템플릿 적용
 
         try:
-            template.attach(self.hass, action_detail)
-            action_detail = template.render_complex(action_detail)
+            action_detail = template.render_complex(action_detail, self.hass)
         except:
             raise Exception(ERR_DRIVER_INTERNAL_ERROR)
 
