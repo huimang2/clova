@@ -12,8 +12,6 @@ from homeassistant.components import (
 )
 from homeassistant.components.climate import const as climate
 from homeassistant.components.humidifier import const as humidifier
-from homeassistant.components.lock import STATE_JAMMED, STATE_UNLOCKING
-from homeassistant.components.media_player.const import MEDIA_TYPE_CHANNEL
 from homeassistant.const import (
     ATTR_ENTITY_ID,
     ATTR_TEMPERATURE,
