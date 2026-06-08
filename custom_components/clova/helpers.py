@@ -12,7 +12,6 @@ from homeassistant.const import (
     ATTR_SUPPORTED_FEATURES,
     CONF_SERVICE,
     CONF_SERVICE_DATA,
-    CLOUD_NEVER_EXPOSED_ENTITIES,
     CONF_NAME,
 )
 from homeassistant.core import HomeAssistant, State, callback
@@ -121,6 +120,7 @@ class AbstractConfig(ABC):
     def __init__(self, hass):
         """ 추상 클래스 초기화 """
         self.hass = hass
+        self.is_supported_cache = {}
 
     @property
     def entity_config(self):
@@ -133,7 +133,7 @@ class AbstractConfig(ABC):
         return {}
 
     @abstractmethod
-    def should_expose(self, state) -> bool:
+    def should_expose(self, entity_id) -> bool:
         """ 노출되어야 하는지를 설정 """
 
 
@@ -214,7 +214,7 @@ class ClovaEntity:
     @callback
     def should_expose(self):
         """ 구성요소의 노출 여부 반환 """
-        return self.config.should_expose(self.state)
+        return self.config.should_expose(self.entity_id)
 
 
     async def sync_serialize(self):
@@ -376,16 +376,34 @@ class ClovaEntity:
         for action in self._actions:
             action.state = self.state
 
+@callback
+def async_get_google_entity_if_supported(
+    hass: HomeAssistant, config: AbstractConfig, state: State
+) -> ClovaEntity | None:
+    """Return a ClovaEntity if entity is supported.
+
+    This function will update the cache, but it does not check the cache first.
+    """
+    features: int | None = state.attributes.get(ATTR_SUPPORTED_FEATURES)
+    entity = ClovaEntity(hass, config, state)
+    is_supported = bool(entity.traits())
+    config.is_supported_cache[state.entity_id] = (features, is_supported)
+    return entity if is_supported else None
 
 @callback
 def async_get_entities(hass, config) -> list:
     """ CLOVA에 의해 지원되는 모든 구성요소 반환 """
-    entities = []
+    entities: list[ClovaEntity] = []
+    is_supported_cache = config.is_supported_cache
     for state in hass.states.async_all():
-        if state.entity_id in CLOUD_NEVER_EXPOSED_ENTITIES:
-            continue
-
-        entity = ClovaEntity(hass, config, state)
-        entities.append(entity)
+        features: int | None = state.attributes.get(ATTR_SUPPORTED_FEATURES)
+        if result := is_supported_cache.get(state.entity_id):
+            cached_features, supported = result
+            if cached_features == features:
+                if supported:
+                    entities.append(ClovaEntity(hass, config, state))
+                continue
+        if entity := async_get_google_entity_if_supported(hass, config, state):
+            entities.append(entity)
 
     return entities
