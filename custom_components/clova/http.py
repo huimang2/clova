@@ -6,8 +6,8 @@ import base64
 
 from aiohttp.web import Request, Response
 from homeassistant.components.http import HomeAssistantView
+from homeassistant.core import split_entity_id
 from homeassistant.const import (
-    CLOUD_NEVER_EXPOSED_ENTITIES,
     CONF_ENTITY_ID,
     CONF_NAME,
 )
@@ -70,25 +70,30 @@ class ClovaConfig(AbstractConfig):
             } for action in c_cmd[CONF_ACTIONS] ]
         } for c_cmd in self._config.get(CONF_CUSTOM_COMMANDS, {}) ]
 
-    def should_expose(self, state) -> bool:
+    def should_expose(self, entity_id) -> bool:
         """ entity가 노출되어야 하는지를 설정 """
         expose_by_default = self._config.get(CONF_EXPOSE_BY_DEFAULT)
         exposed_domains = self._config.get(CONF_EXPOSED_DOMAINS)
 
-        if state.attributes.get("view") is not None:
+        entity_registry = er.async_get(self.hass)
+        registry_entry = entity_registry.async_get(entity_id)
+        if registry_entry:
+            auxiliary_entity = (
+                registry_entry.entity_category is not None
+                or registry_entry.hidden_by is not None
+            )
+        else:
+            auxiliary_entity = False
 
-            return False
-
-        if state.entity_id in CLOUD_NEVER_EXPOSED_ENTITIES:
-            return False
-
-        explicit_expose = self.entity_config.get(state.entity_id, {}).get(CONF_EXPOSE)
+        explicit_expose = self.entity_config.get(entity_id, {}).get(CONF_EXPOSE)
 
         domain_exposed_by_default = (
-            expose_by_default and state.domain in exposed_domains
+            expose_by_default and split_entity_id(entity_id)[0] in exposed_domains
         )
 
-        is_default_exposed = domain_exposed_by_default and explicit_expose is not False
+        entity_exposed_by_default = domain_exposed_by_default and not auxiliary_entity
+
+        is_default_exposed = entity_exposed_by_default and explicit_expose is not False
 
         return is_default_exposed or explicit_expose
 
@@ -104,13 +109,13 @@ class ClovaView(HomeAssistantView):
     def __init__(self, config):
         """ CEK 요청 핸들러 초기화 """
         self.config = config
-    
+
     # POST 요청
     async def post(self, request: Request) -> Response:
         message: dict = await request.json()
         signature_base64: string = request.headers.get(ATTR_SIGNATURECEK)
         signature: bytes = base64.b64decode(signature_base64)
-  
+
         # 디지털 서명 검증
         try:
             load_pem_public_key(
@@ -130,8 +135,8 @@ class ClovaView(HomeAssistantView):
 
         """ 요청 메시지 처리 """
         response = await async_handle_message(
-            request.app["hass"], 
-            self.config, 
+            request.app["hass"],
+            self.config,
             message
         )
 

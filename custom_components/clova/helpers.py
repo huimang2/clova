@@ -121,7 +121,7 @@ class AbstractConfig(ABC):
         return {}
 
     @abstractmethod
-    def should_expose(self, state) -> bool:
+    def should_expose(self, entity_id) -> bool:
         """ 노출되어야 하는지를 설정 """
 
 
@@ -202,7 +202,7 @@ class ClovaEntity:
     @callback
     def should_expose(self):
         """ 구성요소의 노출 여부 반환 """
-        return self.config.should_expose(self.state)
+        return self.config.should_expose(self.entity_id)
 
 
     async def sync_serialize(self):
