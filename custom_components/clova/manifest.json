@@ -1,10 +1,14 @@
 {
   "domain": "clova",
   "name": "CLOVA Home extension",
-  "version": "2025.11.1",
+  "version": "2026.06.0",
   "documentation": "https://github.com/huimang2/clova",
   "requirements": [],
-  "dependencies": ["http"],
-  "codeowners": ["@huimang2"],
+  "dependencies": [
+    "http"
+  ],
+  "codeowners": [
+    "@huimang2"
+  ],
   "iot_class": "cloud_polling"
 }

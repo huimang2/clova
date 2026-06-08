@@ -8,22 +8,23 @@ CLOVA Home extension 컴포넌트 입니다.
 CEK를 통해 CLOVA와 홈어시스턴트 사이의 커뮤니케이션을 지원합니다.
 
 ### Version history
-| 버전     | 일자        | 내용              |
-| :-----: | :---------: | ----------------------- |
-| **v2025.11.1** | 2025.11.19 | 미사용 의존성 제거 |
-| **v2025.11.0** | 2025.11.14 | deprecated된 template 모듈 의존성 대응 |
-| **v2025.2.2** | 2025.02.11 | HA 2025.1 패치로 deprecated된 의존성 교체 - 누락된 의존성 수정 |
-| **v2025.2.1** | 2025.02.10 | HA 2025.1 패치로 deprecated된 의존성 교체 - 누락된 의존성 수정 |
-| **v2025.1.1** | 2025.01.11 | HA 2025.1 패치로 deprecated된 의존성 교체 |
-| **v1.2.0** | 2022.06.09 | 코어 업데이트로 인한 deprecated된 코드 수정 |
-| **v1.1.5** | 2022.04.09 | 코어 업데이트로 인한 오류 수정 |
-| **v1.1.3** | 2022.02.04 | 코어 업데이트로 인한 오류 수정 |
-| **v1.1.2** | 2021.11.08 | 버그 수정 |
-| **v1.1.1** | 2021.11.08 | 버그 수정 |
-| **v1.1.0**  | 2021.11.08  | - 메뉴얼 추가<br>- 스키마 파일(`schema.py`) 추가 <br>- 디바이스 설정 추가<br>- 액션 설정 추가 |
-| **v1.0.2**  | 2021.11.01  | - 오류 수정 <br>- `FAN` 도메인에 대한 모든 액션 추가  |
-| **v1.0.1**  | 2021.10.31  | String.json 파일과 translations 폴더 삭제  |
-| **v1.0.0**  | 2021.10.31  | First version  |
+|      버전      |    일자    | 내용                                                                                          |
+| :------------: | :--------: | --------------------------------------------------------------------------------------------- |
+| **v2026.06.0** | 2026.06.08 | core 변경으로 인한 의존성 수정                                                                |
+| **v2025.11.1** | 2025.11.19 | 미사용 의존성 제거                                                                            |
+| **v2025.11.0** | 2025.11.14 | deprecated된 template 모듈 의존성 대응                                                        |
+| **v2025.2.2**  | 2025.02.11 | HA 2025.1 패치로 deprecated된 의존성 교체 - 누락된 의존성 수정                                |
+| **v2025.2.1**  | 2025.02.10 | HA 2025.1 패치로 deprecated된 의존성 교체 - 누락된 의존성 수정                                |
+| **v2025.1.1**  | 2025.01.11 | HA 2025.1 패치로 deprecated된 의존성 교체                                                     |
+|   **v1.2.0**   | 2022.06.09 | 코어 업데이트로 인한 deprecated된 코드 수정                                                   |
+|   **v1.1.5**   | 2022.04.09 | 코어 업데이트로 인한 오류 수정                                                                |
+|   **v1.1.3**   | 2022.02.04 | 코어 업데이트로 인한 오류 수정                                                                |
+|   **v1.1.2**   | 2021.11.08 | 버그 수정                                                                                     |
+|   **v1.1.1**   | 2021.11.08 | 버그 수정                                                                                     |
+|   **v1.1.0**   | 2021.11.08 | - 메뉴얼 추가<br>- 스키마 파일(`schema.py`) 추가 <br>- 디바이스 설정 추가<br>- 액션 설정 추가 |
+|   **v1.0.2**   | 2021.11.01 | - 오류 수정 <br>- `FAN` 도메인에 대한 모든 액션 추가                                          |
+|   **v1.0.1**   | 2021.10.31 | String.json 파일과 translations 폴더 삭제                                                     |
+|   **v1.0.0**   | 2021.10.31 | First version                                                                                 |
 
 ### Update log
 
@@ -134,12 +135,12 @@ clova:
   entity_config: ...
 ```
 
-| 변수 | 자료형 | 필수/선택 | 설명 |
-| :--: | :--: | :------: |---- |
-| **expose_by_default** | *Boolean* | 선택 | 기본값은 **`True`** 이며지원되는 모든 디바이스를 노출합니다.<br>**`False`** 로 설정하면 수동으로 `expose`를 설정해야합니다.
-| **exposed_domains** | *list* [] | 선택 | 노출을 허용하는 도메인을 설정합니다. 기본값은 다음과 같습니다.<br>- climate<br>- cover<br>- fan<br>- group<br>- humidifier<br>- light<br>- lock<br>- media_player<br>- switch<br>- vacuum
-| **customCommands** | *dict array*<br>[dict] | 선택 | 커스텀 커맨드를 설정합니다.(미구현)
-| **entity_config** | *dict* | 선택 | 구성요소를 설정합니다.
+|         변수          |         자료형         | 필수/선택 | 설명                                                                                                                                                                                      |
+| :-------------------: | :--------------------: | :-------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **expose_by_default** |       *Boolean*        |   선택    | 기본값은 **`True`** 이며지원되는 모든 디바이스를 노출합니다.<br>**`False`** 로 설정하면 수동으로 `expose`를 설정해야합니다.                                                               |
+|  **exposed_domains**  |       *list* []        |   선택    | 노출을 허용하는 도메인을 설정합니다. 기본값은 다음과 같습니다.<br>- climate<br>- cover<br>- fan<br>- group<br>- humidifier<br>- light<br>- lock<br>- media_player<br>- switch<br>- vacuum |
+|  **customCommands**   | *dict array*<br>[dict] |   선택    | 커스텀 커맨드를 설정합니다.(미구현)                                                                                                                                                       |
+|   **entity_config**   |         *dict*         |   선택    | 구성요소를 설정합니다.                                                                                                                                                                    |
 
 ## `customCommands` 설정
 
@@ -183,103 +184,103 @@ clova:
       actionDetails: ...
 ```
 
-| 변수 | 자료형 | 필수/선택 | 설명 |
-| :--: | :--: | :------: |---- |
-| **expose** | *boolean* | 선택 | 구성요소별로 노출여부를 설정합니다. 기본값은 **`True`** 입니다.
-| **name** | *str* | 선택 | 클로바에 명시되는 디바이스명 입니다.
-| **manufacturer** | *str* | 선택 | 클로바에 명시되는 제조사명 입니다.
-| **model** | *str* | 선택 | 클로바에 명시되는 모델명 입니다.
-| **version** | *str* | 선택 | 클로바에 명시되는 버전 입니다.
-| **description** | *str* | 선택 | 클로바에 명시되는 디바이스 설명 입니다.
-| **type** | *str* | 선택 | 클로바에서 인식하는 지정된 디바이스 타입으로 변경합니다.
-| **ir** | *boolean* | 선택 | 디바이스가 적외선 기능을 사용하는지를 나타냅니다. 기본값은 **`False`** 입니다.
-| **location** | *str* | 선택 | 클로바에서 인식하는 지정된 장소명 입니다.
-| **tags** | *list* [] | 선택 | 클로바에서 설정하는 그룹명 입니다. 여러 그룹을 설정 가능합니다.
-| **actionDetails** | *dict array*<br>[dict] | 선택 | 구성요소의 액션에 대한 세부사항을 설정합니다.
+|       변수        |         자료형         | 필수/선택 | 설명                                                                           |
+| :---------------: | :--------------------: | :-------: | ------------------------------------------------------------------------------ |
+|    **expose**     |       *boolean*        |   선택    | 구성요소별로 노출여부를 설정합니다. 기본값은 **`True`** 입니다.                |
+|     **name**      |         *str*          |   선택    | 클로바에 명시되는 디바이스명 입니다.                                           |
+| **manufacturer**  |         *str*          |   선택    | 클로바에 명시되는 제조사명 입니다.                                             |
+|     **model**     |         *str*          |   선택    | 클로바에 명시되는 모델명 입니다.                                               |
+|    **version**    |         *str*          |   선택    | 클로바에 명시되는 버전 입니다.                                                 |
+|  **description**  |         *str*          |   선택    | 클로바에 명시되는 디바이스 설명 입니다.                                        |
+|     **type**      |         *str*          |   선택    | 클로바에서 인식하는 지정된 디바이스 타입으로 변경합니다.                       |
+|      **ir**       |       *boolean*        |   선택    | 디바이스가 적외선 기능을 사용하는지를 나타냅니다. 기본값은 **`False`** 입니다. |
+|   **location**    |         *str*          |   선택    | 클로바에서 인식하는 지정된 장소명 입니다.                                      |
+|     **tags**      |       *list* []        |   선택    | 클로바에서 설정하는 그룹명 입니다. 여러 그룹을 설정 가능합니다.                |
+| **actionDetails** | *dict array*<br>[dict] |   선택    | 구성요소의 액션에 대한 세부사항을 설정합니다.                                  |
 
 ## `type` 변수
 
 `type` 값은 지정된 디바이스 타입을 입력해야 합니다. 디바이스 타입마다 사용할 수 있는 액션이 정해져 있습니다. 소문자로 입력해도 대문자로 변환되어 전달됩니다.
 
-| 타입 | 허용되는 액션 |
-| :--: |------------ |
-| **AIRCONDITIONER**<br>(에어컨 타입) | ChangeFanSpeed, ChangeMode, ChangePower, DecrementFanSpeed, DecrementTargetTemperature, GetCurrentTemperature, GetDeviceState, GetTargetTemperature, HealthCheck, IncrementFanSpeed, IncrementTargetTemperature, SetFanSpeed, SetMode, SetTargetTemperature, StartOscillation, StopOscillation, TurnOff, TurnOn |
-| **AIRPURIFIER**<br>(공기청정기 타입) | ChangeFanSpeed, ChangeMode, ChangePower, DecrementFanSpeed, GetAirQuality, GetCurrentTemperature, GetDeviceState, GetFineDust, GetHumidity, GetUltraFineDust, HealthCheck, IncrementFanSpeed, ReleaseMode, SetFanSpeed, SetMode, TurnOff, TurnOn |
-| **AIRSENSOR**<br>(공기질 측정기 타입) | GetAirQuality, GetCurrentTemperature, GetDeviceState, GetFineDust, GetHumidity, GetUltraFineDust, HealthCheck |
-| **BIDET**<br>(비데 타입) | Close, GetDeviceState, GetExpendableState, HealthCheck, Open, TurnOff, TurnOn |
-| **BODYWEIGHTSCALE**<br>(체중계 타입) | GetBMI, GetBatteryInfo, GetDeviceState, GetBodyFat, GetHealthScore, GetMuscle, GetWeight, HealthCheck |
-| **BUILDING_ELECTRIC_METER**<br>(아파트 전기 타입) | GetConsumption |
-| **BUILDING_ELEVATOR_CALLER**<br>(아파트 엘리베이터 타입) | CallElevator |
-| **BUILDING_GAS_METER**<br>(아파트 가스 타입) | GetConsumption |
-| **BUILDING_HEATING_METER**<br>(아파트 난방 타입) | GetConsumption |
-| **BUILDING_HOTWATER_METER**<br>(아파트 온수 타입) | GetConsumption |
-| **BUILDING_NOTICE_MONITOR**<br>(아파트 공지사항 타입) | GetNotice |
-| **BUILDING_PACKAGE**<br>(아파트 택배 타입) | GetPackage |
-| **BUILDING_PARKING_MONITOR**<br>(아파트 주차 타입) | GetVehicleLocation |
-| **BUILDING_UTILITY_BILL_MONITOR**<br>(아파트 관리비 타입) | GetCurrentBill |
-| **BUILDING_WATER_METER**<br>(아파트 수도 타입) | GetConsumption |
-| **CLOTHESCAREMACHINE**<br>(의류 관리기 타입) | GetDeviceState, GetPhase, GetRemainingTime, HealthCheck, TurnOff, TurnOn |
-| **CLOTHESDRYER**<br>(의류 건조기 타입) | GetDeviceState, GetPhase, GetRemainingTime, HealthCheck, TurnOff, TurnOn |
-| **CLOTHESWASHER**<br>(의류 세탁기 타입) | GetDeviceState, GetPhase, GetRemainingTime, HealthCheck, TurnOff, TurnOn |
-| **DEHUMIDIFIER**<br>(제습기 타입) | GetCurrentTemperature, GetDeviceState, GetHumidity, HealthCheck, SetFanSpeed, TurnOff, TurnOn |
-| **DISHWASHER**<br>(식기 세척기 타입) | GetDeviceState, GetPhase, GetRemainingTime, HealthCheck, TurnOff, TurnOn |
-| **ELECTRICKETTLE**<br>(전기 주전자 타입) | GetCurrentTemperature, GetDeviceState, HealthCheck, TurnOff, TurnOn |
-| **ELECTRICTOOTHBRUSH**<br>(전동 칫솔 타입) | GetDeviceState, HealthCheck |
-| **FAN**<br>(선풍기 타입) | DecrementFanSpeed, GetDeviceState, HealthCheck, IncrementFanSpeed, SetFanSpeed, SetMode, StartOscillation, StopOscillation, TurnOff, TurnOn |
-| **HEATER**<br>(히터 타입) | DecrementTargetTemperature, GetCurrentTemperature, GetDeviceState, GetTargetTemperature, HealthCheck, IncrementTargetTemperature, SetTargetTemperature, TurnOff, TurnOn |
-| **HOMECAM**<br>(홈캠 타입) | GetDetectionCount, HealthCheck, ReleaseMode, SetMode, StartRecording, StopRecording, TurnOff, TurnOn |
-| **HUMIDIFIER**<br>(가습기 타입) | GetCurrentTemperature, GetDeviceState, GetHumidity, HealthCheck, ReleaseMode, SetFanSpeed, SetMode, TurnOff, TurnOn |
-| **KIMCHIREFRIGERATOR**<br>(김치 냉장고 타입) | GetDeviceState, HealthCheck |
-| **LIGHT**<br>(스마트 조명 기기 타입) | DecrementBrightness, DecrementVolume HealthCheck, GetDeviceState, IncrementBrightness, IncrementVolume, ReleaseMode, SetBrightness, SetColor, SetColorTemperature, SetMode, TurnOff, TurnOn |
-| **MASSAGECHAIR**<br>(안마 의자 타입) | DecrementIntensityLevel, GetDeviceState, HealthCheck, IncrementIntensityLevel, TurnOff, TurnOn |
-| **MICROWAVE**<br>(전자 레인지 타입) | GetDeviceState, GetRemainingTime, HealthCheck, TurnOff, TurnOn |
-| **MOTIONSENSOR**<br>(동작 감지 센서 타입) | GetDetectedTime, GetDeviceState, GetPowerState, HealthCheck, ReleaseMode, SetMode, TurnOff, TurnOn |
-| **OPENCLOSESENSOR**<br>(열림 감지 센서 타입) | GetCloseTime, GetDeviceState, GetOpenState, GetOpenTime, HealthCheck |
-| **OVEN**<br>(오븐 타입) | GetDeviceState, GetRemainingTime, HealthCheck, Preheat |
-| **POWERSTRIP**<br>(멀티 탭 타입) | GetConsumption, GetDeviceState, GetEstimateBill, GetProgressiveTaxBracket, HealthCheck, TurnOff, TurnOn |
-| **PURIFIER**<br>(정수기 타입) | GetConsumption, GetDeviceState, GetExpendableState, HealthCheck, ReleaseMode, SetMode, SetTargetTemperature |
-| **RANGE**<br>(레인지 타입) | GetDeviceState, HealthCheck |
-| **RANGEHOOD**<br>(레인지 후드 타입) | GetDeviceState, HealthCheck, TurnOff, TurnOn |
-| **REFRIGERATOR**<br>(냉장고 타입) | GetDeviceState, HealthCheck, ReleaseMode, SetMode, SetTargetTemperature |
-| **RICECOOKER**<br>(전기 밥솥 타입) | GetCleaningCycle, GetDeviceState, GetExpendableState, GetKeepWarmTime, GetPhase, GetRemainingTime, HealthCheck, ReleaseMode, SetMode, Stop, TurnOff, TurnOn |
-| **ROBOTVACUUM**<br>(로봇 청소기 타입) | Charge, GetBatteryInfo, GetDeviceState, HealthCheck, TurnOff, TurnOn |
-| **SETTOPBOX**<br>(TV 셋톱 박스 타입) | ChangeInputSource, ChangePower, DecrementChannel, DecrementVolume, GetDeviceState, HealthCheck, IncrementChannel, IncrementVolume, Mute, SetChannel, SetChannelByName, TurnOff, TurnOn, Unmute |
-| **SLEEPINGMONITOR**<br>(수면 센서 타입) | GetAsleepDuration, GetAwakeDuration, GetDeviceState, GetSleepScore, GetSleepStartTime, HealthCheck, TurnOff, TurnOn |
-| **SMARTBED**<br>(스마트 침대 타입) | GetDeviceState, HealthCheck, Lower, Raise, Stop |
-| **SMARTCHAIR**<br>(스마트 의자 타입) | GetCurrentSittingState, GetDeviceState, GetRightPostureRatio, GetUsageTime, HealthCheck |
-| **SMARTCURTAIN**<br>(스마트 커튼 타입) | Close, GetDeviceState, HealthCheck, Open, Stop |
-| **SMARTHUB**<br>(스마트 허브 타입) | GetCurrentTemperature, GetDeviceState, GetHumidity, GetTargetTemperature, HealthCheck, SetMode |
-| **SMARTLOCK**<br>(스마트락(도어락) 타입) | GetDeviceState, GetLockState, HealthCheck, SetLockState |
-| **SMARTMETER**<br>(전기 계량기 타입) | GetConsumption, GetCurrentBill, GetDeviceState, GetEstimateBill, GetProgressiveTaxBracket, HealthCheck |
-| **SMARTPLUG**<br>(스마트 플러그 타입) | GetConsumption, GetDeviceState, GetEstimateBill, HealthCheck, TurnOff, TurnOn |
-| **SMARTTV**<br>(스마트 TV 타입) | ChangeInputSource, ChangePower, DecrementChannel, DecrementVolume, GetDeviceState, HealthCheck, IncrementChannel, IncrementVolume, Mute, SetChannel, SetChannelByName, TurnOff, TurnOn, Unmute |
-| **SMARTVALVE**<br>(스마트 밸브 타입) | GetDeviceState, GetLockState, SetLockState |
-| **SMOKESENSOR**<br>(연기 센서 타입) | GetDeviceState, HealthCheck |
-| **SWITCH**<br>(가정 내 콘센트 전원을 제어하는 스위치 타입) | GetDeviceState, HealthCheck, TurnOff, TurnOn |
-| **THERMOSTAT**<br>(온도 조절 기기 타입) | DecrementTargetTemperature, GetConsumption, GetCurrentTemperature, GetDeviceState, GetEstimateConsumption, GetTargetTemperature, HealthCheck, IncrementTargetTemperature, SetMode, SetTargetTemperature TurnOff, TurnOn |
-| **VENTILATOR**<br>(환풍기 타입) | GetAirQuality, GetCurrentTemperature, GetDeviceState, GetHumidity, GetTargetTemperature, HealthCheck, ReleaseMode, SetFanSpeed, SetMode, TurnOff, TurnOn |
-| **WATERBOILER**<br>(온수기 타입) | GetDeviceState, HealthCheck, SetMode, TurnOff, TurnOn |
-| **WINECELLAR**<br>(와인 셀러 타입) | GetDeviceState, HealthCheck, ReleaseMode, SetMode, SetTargetTemperature, TurnOff, TurnOn |
+|                            타입                            | 허용되는 액션                                                                                                                                                                                                                                                                                                   |
+| :--------------------------------------------------------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|            **AIRCONDITIONER**<br>(에어컨 타입)             | ChangeFanSpeed, ChangeMode, ChangePower, DecrementFanSpeed, DecrementTargetTemperature, GetCurrentTemperature, GetDeviceState, GetTargetTemperature, HealthCheck, IncrementFanSpeed, IncrementTargetTemperature, SetFanSpeed, SetMode, SetTargetTemperature, StartOscillation, StopOscillation, TurnOff, TurnOn |
+|            **AIRPURIFIER**<br>(공기청정기 타입)            | ChangeFanSpeed, ChangeMode, ChangePower, DecrementFanSpeed, GetAirQuality, GetCurrentTemperature, GetDeviceState, GetFineDust, GetHumidity, GetUltraFineDust, HealthCheck, IncrementFanSpeed, ReleaseMode, SetFanSpeed, SetMode, TurnOff, TurnOn                                                                |
+|           **AIRSENSOR**<br>(공기질 측정기 타입)            | GetAirQuality, GetCurrentTemperature, GetDeviceState, GetFineDust, GetHumidity, GetUltraFineDust, HealthCheck                                                                                                                                                                                                   |
+|                  **BIDET**<br>(비데 타입)                  | Close, GetDeviceState, GetExpendableState, HealthCheck, Open, TurnOff, TurnOn                                                                                                                                                                                                                                   |
+|            **BODYWEIGHTSCALE**<br>(체중계 타입)            | GetBMI, GetBatteryInfo, GetDeviceState, GetBodyFat, GetHealthScore, GetMuscle, GetWeight, HealthCheck                                                                                                                                                                                                           |
+|     **BUILDING_ELECTRIC_METER**<br>(아파트 전기 타입)      | GetConsumption                                                                                                                                                                                                                                                                                                  |
+|  **BUILDING_ELEVATOR_CALLER**<br>(아파트 엘리베이터 타입)  | CallElevator                                                                                                                                                                                                                                                                                                    |
+|        **BUILDING_GAS_METER**<br>(아파트 가스 타입)        | GetConsumption                                                                                                                                                                                                                                                                                                  |
+|      **BUILDING_HEATING_METER**<br>(아파트 난방 타입)      | GetConsumption                                                                                                                                                                                                                                                                                                  |
+|     **BUILDING_HOTWATER_METER**<br>(아파트 온수 타입)      | GetConsumption                                                                                                                                                                                                                                                                                                  |
+|   **BUILDING_NOTICE_MONITOR**<br>(아파트 공지사항 타입)    | GetNotice                                                                                                                                                                                                                                                                                                       |
+|         **BUILDING_PACKAGE**<br>(아파트 택배 타입)         | GetPackage                                                                                                                                                                                                                                                                                                      |
+|     **BUILDING_PARKING_MONITOR**<br>(아파트 주차 타입)     | GetVehicleLocation                                                                                                                                                                                                                                                                                              |
+| **BUILDING_UTILITY_BILL_MONITOR**<br>(아파트 관리비 타입)  | GetCurrentBill                                                                                                                                                                                                                                                                                                  |
+|       **BUILDING_WATER_METER**<br>(아파트 수도 타입)       | GetConsumption                                                                                                                                                                                                                                                                                                  |
+|        **CLOTHESCAREMACHINE**<br>(의류 관리기 타입)        | GetDeviceState, GetPhase, GetRemainingTime, HealthCheck, TurnOff, TurnOn                                                                                                                                                                                                                                        |
+|           **CLOTHESDRYER**<br>(의류 건조기 타입)           | GetDeviceState, GetPhase, GetRemainingTime, HealthCheck, TurnOff, TurnOn                                                                                                                                                                                                                                        |
+|          **CLOTHESWASHER**<br>(의류 세탁기 타입)           | GetDeviceState, GetPhase, GetRemainingTime, HealthCheck, TurnOff, TurnOn                                                                                                                                                                                                                                        |
+|             **DEHUMIDIFIER**<br>(제습기 타입)              | GetCurrentTemperature, GetDeviceState, GetHumidity, HealthCheck, SetFanSpeed, TurnOff, TurnOn                                                                                                                                                                                                                   |
+|            **DISHWASHER**<br>(식기 세척기 타입)            | GetDeviceState, GetPhase, GetRemainingTime, HealthCheck, TurnOff, TurnOn                                                                                                                                                                                                                                        |
+|          **ELECTRICKETTLE**<br>(전기 주전자 타입)          | GetCurrentTemperature, GetDeviceState, HealthCheck, TurnOff, TurnOn                                                                                                                                                                                                                                             |
+|         **ELECTRICTOOTHBRUSH**<br>(전동 칫솔 타입)         | GetDeviceState, HealthCheck                                                                                                                                                                                                                                                                                     |
+|                  **FAN**<br>(선풍기 타입)                  | DecrementFanSpeed, GetDeviceState, HealthCheck, IncrementFanSpeed, SetFanSpeed, SetMode, StartOscillation, StopOscillation, TurnOff, TurnOn                                                                                                                                                                     |
+|                 **HEATER**<br>(히터 타입)                  | DecrementTargetTemperature, GetCurrentTemperature, GetDeviceState, GetTargetTemperature, HealthCheck, IncrementTargetTemperature, SetTargetTemperature, TurnOff, TurnOn                                                                                                                                         |
+|                 **HOMECAM**<br>(홈캠 타입)                 | GetDetectionCount, HealthCheck, ReleaseMode, SetMode, StartRecording, StopRecording, TurnOff, TurnOn                                                                                                                                                                                                            |
+|              **HUMIDIFIER**<br>(가습기 타입)               | GetCurrentTemperature, GetDeviceState, GetHumidity, HealthCheck, ReleaseMode, SetFanSpeed, SetMode, TurnOff, TurnOn                                                                                                                                                                                             |
+|        **KIMCHIREFRIGERATOR**<br>(김치 냉장고 타입)        | GetDeviceState, HealthCheck                                                                                                                                                                                                                                                                                     |
+|            **LIGHT**<br>(스마트 조명 기기 타입)            | DecrementBrightness, DecrementVolume HealthCheck, GetDeviceState, IncrementBrightness, IncrementVolume, ReleaseMode, SetBrightness, SetColor, SetColorTemperature, SetMode, TurnOff, TurnOn                                                                                                                     |
+|            **MASSAGECHAIR**<br>(안마 의자 타입)            | DecrementIntensityLevel, GetDeviceState, HealthCheck, IncrementIntensityLevel, TurnOff, TurnOn                                                                                                                                                                                                                  |
+|            **MICROWAVE**<br>(전자 레인지 타입)             | GetDeviceState, GetRemainingTime, HealthCheck, TurnOff, TurnOn                                                                                                                                                                                                                                                  |
+|         **MOTIONSENSOR**<br>(동작 감지 센서 타입)          | GetDetectedTime, GetDeviceState, GetPowerState, HealthCheck, ReleaseMode, SetMode, TurnOff, TurnOn                                                                                                                                                                                                              |
+|        **OPENCLOSESENSOR**<br>(열림 감지 센서 타입)        | GetCloseTime, GetDeviceState, GetOpenState, GetOpenTime, HealthCheck                                                                                                                                                                                                                                            |
+|                  **OVEN**<br>(오븐 타입)                   | GetDeviceState, GetRemainingTime, HealthCheck, Preheat                                                                                                                                                                                                                                                          |
+|              **POWERSTRIP**<br>(멀티 탭 타입)              | GetConsumption, GetDeviceState, GetEstimateBill, GetProgressiveTaxBracket, HealthCheck, TurnOff, TurnOn                                                                                                                                                                                                         |
+|               **PURIFIER**<br>(정수기 타입)                | GetConsumption, GetDeviceState, GetExpendableState, HealthCheck, ReleaseMode, SetMode, SetTargetTemperature                                                                                                                                                                                                     |
+|                 **RANGE**<br>(레인지 타입)                 | GetDeviceState, HealthCheck                                                                                                                                                                                                                                                                                     |
+|            **RANGEHOOD**<br>(레인지 후드 타입)             | GetDeviceState, HealthCheck, TurnOff, TurnOn                                                                                                                                                                                                                                                                    |
+|             **REFRIGERATOR**<br>(냉장고 타입)              | GetDeviceState, HealthCheck, ReleaseMode, SetMode, SetTargetTemperature                                                                                                                                                                                                                                         |
+|             **RICECOOKER**<br>(전기 밥솥 타입)             | GetCleaningCycle, GetDeviceState, GetExpendableState, GetKeepWarmTime, GetPhase, GetRemainingTime, HealthCheck, ReleaseMode, SetMode, Stop, TurnOff, TurnOn                                                                                                                                                     |
+|           **ROBOTVACUUM**<br>(로봇 청소기 타입)            | Charge, GetBatteryInfo, GetDeviceState, HealthCheck, TurnOff, TurnOn                                                                                                                                                                                                                                            |
+|            **SETTOPBOX**<br>(TV 셋톱 박스 타입)            | ChangeInputSource, ChangePower, DecrementChannel, DecrementVolume, GetDeviceState, HealthCheck, IncrementChannel, IncrementVolume, Mute, SetChannel, SetChannelByName, TurnOff, TurnOn, Unmute                                                                                                                  |
+|          **SLEEPINGMONITOR**<br>(수면 센서 타입)           | GetAsleepDuration, GetAwakeDuration, GetDeviceState, GetSleepScore, GetSleepStartTime, HealthCheck, TurnOff, TurnOn                                                                                                                                                                                             |
+|             **SMARTBED**<br>(스마트 침대 타입)             | GetDeviceState, HealthCheck, Lower, Raise, Stop                                                                                                                                                                                                                                                                 |
+|            **SMARTCHAIR**<br>(스마트 의자 타입)            | GetCurrentSittingState, GetDeviceState, GetRightPostureRatio, GetUsageTime, HealthCheck                                                                                                                                                                                                                         |
+|           **SMARTCURTAIN**<br>(스마트 커튼 타입)           | Close, GetDeviceState, HealthCheck, Open, Stop                                                                                                                                                                                                                                                                  |
+|             **SMARTHUB**<br>(스마트 허브 타입)             | GetCurrentTemperature, GetDeviceState, GetHumidity, GetTargetTemperature, HealthCheck, SetMode                                                                                                                                                                                                                  |
+|          **SMARTLOCK**<br>(스마트락(도어락) 타입)          | GetDeviceState, GetLockState, HealthCheck, SetLockState                                                                                                                                                                                                                                                         |
+|            **SMARTMETER**<br>(전기 계량기 타입)            | GetConsumption, GetCurrentBill, GetDeviceState, GetEstimateBill, GetProgressiveTaxBracket, HealthCheck                                                                                                                                                                                                          |
+|           **SMARTPLUG**<br>(스마트 플러그 타입)            | GetConsumption, GetDeviceState, GetEstimateBill, HealthCheck, TurnOff, TurnOn                                                                                                                                                                                                                                   |
+|              **SMARTTV**<br>(스마트 TV 타입)               | ChangeInputSource, ChangePower, DecrementChannel, DecrementVolume, GetDeviceState, HealthCheck, IncrementChannel, IncrementVolume, Mute, SetChannel, SetChannelByName, TurnOff, TurnOn, Unmute                                                                                                                  |
+|            **SMARTVALVE**<br>(스마트 밸브 타입)            | GetDeviceState, GetLockState, SetLockState                                                                                                                                                                                                                                                                      |
+|            **SMOKESENSOR**<br>(연기 센서 타입)             | GetDeviceState, HealthCheck                                                                                                                                                                                                                                                                                     |
+| **SWITCH**<br>(가정 내 콘센트 전원을 제어하는 스위치 타입) | GetDeviceState, HealthCheck, TurnOff, TurnOn                                                                                                                                                                                                                                                                    |
+|          **THERMOSTAT**<br>(온도 조절 기기 타입)           | DecrementTargetTemperature, GetConsumption, GetCurrentTemperature, GetDeviceState, GetEstimateConsumption, GetTargetTemperature, HealthCheck, IncrementTargetTemperature, SetMode, SetTargetTemperature TurnOff, TurnOn                                                                                         |
+|              **VENTILATOR**<br>(환풍기 타입)               | GetAirQuality, GetCurrentTemperature, GetDeviceState, GetHumidity, GetTargetTemperature, HealthCheck, ReleaseMode, SetFanSpeed, SetMode, TurnOff, TurnOn                                                                                                                                                        |
+|              **WATERBOILER**<br>(온수기 타입)              | GetDeviceState, HealthCheck, SetMode, TurnOff, TurnOn                                                                                                                                                                                                                                                           |
+|             **WINECELLAR**<br>(와인 셀러 타입)             | GetDeviceState, HealthCheck, ReleaseMode, SetMode, SetTargetTemperature, TurnOff, TurnOn                                                                                                                                                                                                                        |
 
 > 홈어시스턴트의 도메인은 다음과 같은 타입으로 변환됩니다.
 
-| 도메인 | 타입 | 구현 여부 |
-| :---: | :--: | :------: |
-| **switch** | SWITCH | O |
-| **climate** | AIRCONDITIONER | O |
-| **fan** | FAN | O |
-| **cover** | SMARTCURTAIN | X |
-| **group** | SWITCH | O |
-| **light** | LIGHT | X |
-| **lock** | SMARTLOCK | X |
-| **media_player** | SETTOPBOX | X |
-| **vacuum** | ROBOTVACUUM | X |
-| **camera** | TYPE_HOMECAM | X |
-| **binary_sensor**<br>(opening 클래스) | OPENCLOSESENSOR | X |
-| **binary_sensor**<br>(window 클래스) | OPENCLOSESENSOR | X |
-| **media_player**<br>(TV 클래스) | SMARTTV | X |
-| **humidifier**<br>(humidifier 클래스) | HUMIDIFIER | X |
-| **humidifier**<br>(dehumidifier 클래스) | DEHUMIDIFIER | X |
+|                 도메인                  |      타입       | 구현 여부 |
+| :-------------------------------------: | :-------------: | :-------: |
+|               **switch**                |     SWITCH      |     O     |
+|               **climate**               | AIRCONDITIONER  |     O     |
+|                 **fan**                 |       FAN       |     O     |
+|                **cover**                |  SMARTCURTAIN   |     X     |
+|                **group**                |     SWITCH      |     O     |
+|                **light**                |      LIGHT      |     X     |
+|                **lock**                 |    SMARTLOCK    |     X     |
+|            **media_player**             |    SETTOPBOX    |     X     |
+|               **vacuum**                |   ROBOTVACUUM   |     X     |
+|               **camera**                |  TYPE_HOMECAM   |     X     |
+|  **binary_sensor**<br>(opening 클래스)  | OPENCLOSESENSOR |     X     |
+|  **binary_sensor**<br>(window 클래스)   | OPENCLOSESENSOR |     X     |
+|     **media_player**<br>(TV 클래스)     |     SMARTTV     |     X     |
+|  **humidifier**<br>(humidifier 클래스)  |   HUMIDIFIER    |     X     |
+| **humidifier**<br>(dehumidifier 클래스) |  DEHUMIDIFIER   |     X     |
 
 > 참고 : 완전히 구현된 도메인은 switch, climate, fan, group 입니다.<br>
 > 나머지 도메인은 기본적인 ON/OFF 액션만 구현된 상태입니다.
@@ -289,53 +290,53 @@ clova:
 `location` 값은 지정된 장소 타입을 입력해야 합니다. 해당 장소 타입은 지정된 그룹으로 편성됩니다.
 `tags` 변수를 통해서도 그룹 지정이 가능하므로 값이 지정된 `location` 보다는 `tags`를 사용하는 것이 더 편합니다.
 
-| 타입 | 그룹 |
-| :--: | :--: |
-| **ATTIC** | 다락방 |
-| **BALCONY** | 베란다 |
-| **BALCONY_IN_LIVING_ROOM** | 거실베란다 |
-| **BALCONY_IN_MAIN_ROOM** | 안방베란다 |
-| **BALCONY_KITCHEN** | 주방베란다 |
-| **BATH_ROOM** | 화장실 |
+|             타입             |    그룹     |
+| :--------------------------: | :---------: |
+|          **ATTIC**           |   다락방    |
+|         **BALCONY**          |   베란다    |
+|  **BALCONY_IN_LIVING_ROOM**  | 거실베란다  |
+|   **BALCONY_IN_MAIN_ROOM**   | 안방베란다  |
+|     **BALCONY_KITCHEN**      | 주방베란다  |
+|        **BATH_ROOM**         |   화장실    |
 | **BATH_ROOM_IN_LIVING_ROOM** | 거실 화장실 |
-| **BATH_ROOM_IN_MAIN_ROOM** | 안방 화장실 |
-| **BED_ROOM** | 침실 |
-| **BIG_BATH_ROOM** | 큰 화장실 |
-| **BIG_CHILD_ROOM** | 큰아이 방 |
-| **BIG_ROOM** | 큰 방 |
-| **BOILER_ROOM** | 보일러실 |
-| **DINING_ROOM** | 식당 |
-| **DRESS_ROOM** | 드레스룸 |
-| **ENTRANCE** | 현관 |
-| **FAMILY_ROOM** | 가족룸 |
-| **FATHER_ROOM** | 아버님방 |
-| **FIFTH_ROOM** | 다섯째 방 |
-| **FIRST_ROOM** | 첫째 방 |
-| **FOURTH_ROOM** | 넷째 방 |
-| **HALLWAY** | 복도 |
-| **KITCHEN** | 주방 |
-| **LIBRARY** | 서재 |
-| **LIVING_ROOM** | 거실 |
-| **MAIN_GATE** | 대문 |
-| **MAIN_ROOM** | 안방 |
-| **MOTHER_ROOM** | 어머님방 |
-| **MY_ROOM** | 내 방 |
-| **PARENTS_ROOM** | 부모님 방 |
-| **PLAY_ROOM** | 놀이방 |
-| **POWDER_ROOM** | 파우더룸 |
-| **ROOM** | 방 |
-| **SECOND_ROOM** | 둘째 방 |
-| **SMALL_CHILD_ROOM** | 작은아이 방 |
-| **SMALL_LIVING_ROOM** | 작은 거실 |
-| **SMALL_ROOM** | 작은 방 |
-| **SMALL_KITCHEN** | 작은 주방 |
-| **SMALL_BATH_ROOM** | 작은 화장실 |
-| **STAIRS** | 계단 |
-| **THIRD_ROOM** | 셋째 방 |
-| **UPSTAIRS_ROOM** | 윗층 방 |
-| **UTILITY_ROOM** | 다용도실 |
-| **WAREHOUSE** | 창고 |
-| **YARD** | 마당 |
+|  **BATH_ROOM_IN_MAIN_ROOM**  | 안방 화장실 |
+|         **BED_ROOM**         |    침실     |
+|      **BIG_BATH_ROOM**       |  큰 화장실  |
+|      **BIG_CHILD_ROOM**      |  큰아이 방  |
+|         **BIG_ROOM**         |    큰 방    |
+|       **BOILER_ROOM**        |  보일러실   |
+|       **DINING_ROOM**        |    식당     |
+|        **DRESS_ROOM**        |  드레스룸   |
+|         **ENTRANCE**         |    현관     |
+|       **FAMILY_ROOM**        |   가족룸    |
+|       **FATHER_ROOM**        |  아버님방   |
+|        **FIFTH_ROOM**        |  다섯째 방  |
+|        **FIRST_ROOM**        |   첫째 방   |
+|       **FOURTH_ROOM**        |   넷째 방   |
+|         **HALLWAY**          |    복도     |
+|         **KITCHEN**          |    주방     |
+|         **LIBRARY**          |    서재     |
+|       **LIVING_ROOM**        |    거실     |
+|        **MAIN_GATE**         |    대문     |
+|        **MAIN_ROOM**         |    안방     |
+|       **MOTHER_ROOM**        |  어머님방   |
+|         **MY_ROOM**          |    내 방    |
+|       **PARENTS_ROOM**       |  부모님 방  |
+|        **PLAY_ROOM**         |   놀이방    |
+|       **POWDER_ROOM**        |  파우더룸   |
+|           **ROOM**           |     방      |
+|       **SECOND_ROOM**        |   둘째 방   |
+|     **SMALL_CHILD_ROOM**     | 작은아이 방 |
+|    **SMALL_LIVING_ROOM**     |  작은 거실  |
+|        **SMALL_ROOM**        |   작은 방   |
+|      **SMALL_KITCHEN**       |  작은 주방  |
+|     **SMALL_BATH_ROOM**      | 작은 화장실 |
+|          **STAIRS**          |    계단     |
+|        **THIRD_ROOM**        |   셋째 방   |
+|      **UPSTAIRS_ROOM**       |   윗층 방   |
+|       **UTILITY_ROOM**       |  다용도실   |
+|        **WAREHOUSE**         |    창고     |
+|           **YARD**           |    마당     |
 
 ## `actionDetails` 구성
 
@@ -377,13 +378,13 @@ clova:
 
 > 참고 : 홈어시스턴트의 템플릿 언어를 사용하여 데이터를 전달할 수 있습니다.
 
-| 변수 | 자료형 | 필수/선택 | 설명 |
-| :--: | :---: | :------: |----- |
-| **action** | dict | 필수 | 해당 dictionary의 키값으로 `action`을 사용합니다. <br>`actionDetails`을 설정하면 필수로 입력해야하며 해당 구성요소가 수행할 수 있는 액션만 입력가능합니다. <br>위의 예시에서는 `switch` 도메인에서 `TurnOn` 액션을 설정했으며, `switch` 도메인은 `SWITCH` 타입에 해당하여 해당 액션을 사용가능합니다.|
-| **service** | service_id | 선택 | 액션에 요청이 오면 해당 서비스를 수행합니다. |
-| **data** | dict | 선택 | 서비스의 payload 입니다. 서비스와 함께 작동합니다. |
-| **response** | dict | 필수 | 클로바 서버의 요청에 대한 응답을 설정합니다. 기본값은 {}이며, 응답 메시지의 형식은 [클로바 개발문서](https://developers.naver.com/console/clova/home_ext/Develop/References/Message_Interfaces.md)를 참고하세요. Response 메시지의 `payload` 부분만 작성하면 됩니다. |
-| **allowableValue** | dict | 선택 | 액션의 허용값을 설정합니다.<br>`type`은 **[string, number, boundedNumber]** 중에 하나를 입력합니다.<br>`minValue`와 `maxValue`는 `type`이 **"boundedNumber"** 인 경우 필수로 입력해야합니다.<br>`enumValues`는 `type`이 **"string"** 이면 문자열 배열, `type`이 **"number"** 이면 숫자 배열을 입력합니다. |
+|        변수        |   자료형   | 필수/선택 | 설명                                                                                                                                                                                                                                                                                                      |
+| :----------------: | :--------: | :-------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|     **action**     |    dict    |   필수    | 해당 dictionary의 키값으로 `action`을 사용합니다. <br>`actionDetails`을 설정하면 필수로 입력해야하며 해당 구성요소가 수행할 수 있는 액션만 입력가능합니다. <br>위의 예시에서는 `switch` 도메인에서 `TurnOn` 액션을 설정했으며, `switch` 도메인은 `SWITCH` 타입에 해당하여 해당 액션을 사용가능합니다.     |
+|    **service**     | service_id |   선택    | 액션에 요청이 오면 해당 서비스를 수행합니다.                                                                                                                                                                                                                                                              |
+|      **data**      |    dict    |   선택    | 서비스의 payload 입니다. 서비스와 함께 작동합니다.                                                                                                                                                                                                                                                        |
+|    **response**    |    dict    |   필수    | 클로바 서버의 요청에 대한 응답을 설정합니다. 기본값은 {}이며, 응답 메시지의 형식은 [클로바 개발문서](https://developers.naver.com/console/clova/home_ext/Develop/References/Message_Interfaces.md)를 참고하세요. Response 메시지의 `payload` 부분만 작성하면 됩니다.                                      |
+| **allowableValue** |    dict    |   선택    | 액션의 허용값을 설정합니다.<br>`type`은 **[string, number, boundedNumber]** 중에 하나를 입력합니다.<br>`minValue`와 `maxValue`는 `type`이 **"boundedNumber"** 인 경우 필수로 입력해야합니다.<br>`enumValues`는 `type`이 **"string"** 이면 문자열 배열, `type`이 **"number"** 이면 숫자 배열을 입력합니다. |
 
 ## Request값 이용하기
 
@@ -467,6 +468,6 @@ clova:
 - 네이버 카페 : HomeAssistant (https://cafe.naver.com/koreassistant)
 - 클로바 플랫폼 가이드 (https://developers.naver.com/console/clova/home_ext/)
 
-[version-shield]: https://img.shields.io/badge/version-v2025.11.1-orange.svg
+[version-shield]: https://img.shields.io/badge/version-v2026.06.0-orange.svg
 [hakc-shield]: https://img.shields.io/badge/HAKC-Enjoy-blue.svg
 [hacs-shield]: https://img.shields.io/badge/HACS-Custom-red.svg
