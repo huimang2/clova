@@ -377,7 +377,7 @@ class ClovaEntity:
             action.state = self.state
 
 @callback
-def async_get_google_entity_if_supported(
+def async_get_clova_entity_if_supported(
     hass: HomeAssistant, config: AbstractConfig, state: State
 ) -> ClovaEntity | None:
     """Return a ClovaEntity if entity is supported.
@@ -386,7 +386,7 @@ def async_get_google_entity_if_supported(
     """
     features: int | None = state.attributes.get(ATTR_SUPPORTED_FEATURES)
     entity = ClovaEntity(hass, config, state)
-    is_supported = bool(entity.traits())
+    is_supported = bool(entity.actions())
     config.is_supported_cache[state.entity_id] = (features, is_supported)
     return entity if is_supported else None
 
@@ -403,7 +403,7 @@ def async_get_entities(hass, config) -> list:
                 if supported:
                     entities.append(ClovaEntity(hass, config, state))
                 continue
-        if entity := async_get_google_entity_if_supported(hass, config, state):
+        if entity := async_get_clova_entity_if_supported(hass, config, state):
             entities.append(entity)
 
     return entities
