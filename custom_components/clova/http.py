@@ -7,6 +7,7 @@ import base64
 from aiohttp.web import Request, Response
 from homeassistant.components.http import HomeAssistantView
 from homeassistant.core import split_entity_id
+from homeassistant.helpers import entity_registry as er
 from homeassistant.const import (
     CONF_ENTITY_ID,
     CONF_NAME,
